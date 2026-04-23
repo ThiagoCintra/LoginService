@@ -1,6 +1,7 @@
 package com.br.itau.login.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -59,7 +60,7 @@ class SessionServiceImplTest {
 
 	@Test
 	void delete_shouldRemoveSessionKey() {
-		sessionService.delete("sid-1");
+		assertThatNoException().isThrownBy(() -> sessionService.delete("sid-1"));
 		verify(redisTemplate).delete("session:sid-1");
 	}
 }

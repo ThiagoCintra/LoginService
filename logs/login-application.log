@@ -2890,3 +2890,67 @@ Identify and stop the process that's listening on port 8081 or configure this ap
 2026-04-23 23:41:21.444  INFO [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-04-23 23:41:21.448  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2026-04-23 23:41:21.451  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-23 23:44:06.504  INFO [main] c.b.i.l.LoginApplicationTests - Starting LoginApplicationTests using Java 21.0.10 with PID 4920 (started by runner in /home/runner/work/LoginService/LoginService)
+2026-04-23 23:44:06.507  INFO [main] c.b.i.l.LoginApplicationTests - The following 1 profile is active: "test"
+2026-04-23 23:44:07.568  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 23:44:07.570  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 23:44:07.733  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 154 ms. Found 1 JPA repository interface.
+2026-04-23 23:44:08.506  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 23:44:08.569  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 23:44:09.032  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 23:44:09.066  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 23:44:09.267  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-04-23 23:44:09.269  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 23:44:09.339  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:testdb]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: TESTDB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 23:44:10.223  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 23:44:10.227  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 23:44:10.272  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 23:44:10.406  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 23:44:11.690  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 23:44:13.666  INFO [main] c.b.i.l.LoginApplicationTests - Started LoginApplicationTests in 7.699 seconds (process running for 9.324)
+2026-04-23 23:44:15.575  INFO [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 23:44:15.580  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 23:44:15.583  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-23 23:44:25.648  INFO [main] c.b.i.l.LoginApplicationTests - Starting LoginApplicationTests using Java 21.0.10 with PID 5055 (started by runner in /home/runner/work/LoginService/LoginService)
+2026-04-23 23:44:25.655  INFO [main] c.b.i.l.LoginApplicationTests - The following 1 profile is active: "test"
+2026-04-23 23:44:26.706  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 23:44:26.708  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 23:44:26.858  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 137 ms. Found 1 JPA repository interface.
+2026-04-23 23:44:27.626  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 23:44:27.678  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 23:44:28.136  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 23:44:28.169  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 23:44:28.349  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-04-23 23:44:28.351  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 23:44:28.424  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:testdb]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: TESTDB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 23:44:29.402  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 23:44:29.405  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 23:44:29.439  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 23:44:29.542  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 23:44:30.940  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 23:44:32.719  INFO [main] c.b.i.l.LoginApplicationTests - Started LoginApplicationTests in 7.594 seconds (process running for 9.143)
+2026-04-23 23:44:34.464  INFO [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 23:44:34.469  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 23:44:34.473  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
