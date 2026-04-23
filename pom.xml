@@ -14,9 +14,9 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
-		<java.version>25</java.version>
-		<maven.compiler.source>25</maven.compiler.source>
-		<maven.compiler.target>25</maven.compiler.target>
+		<java.version>21</java.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 		<mapstruct.version>1.5.5.Final</mapstruct.version>
 		<lombok.version>1.18.32</lombok.version>
 	</properties>
@@ -133,17 +133,6 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.12.1</version>
 				<configuration>
-					<!-- Use Java 25 for compilation. Force forking and point to
-					the JDK 25 javac executable
-								     to avoid using mismatched compiler classes on the classpath that can cause
-								     ExceptionInInitializerError (com.sun.tools.javac.code.TypeTag :: UNKNOWN). -->
-					<fork>true</fork>
-					<!-- Use the JDK21 javac for compilation to keep annotation
-					processors (Lombok/MapStruct)
-																				    compatible while allowing the project to target Java 25 APIs if needed. Adjust
-																				    this path if your JDK 21 is installed elsewhere. -->
-					<executable>
-						/opt/homebrew/Cellar/openjdk@21/21.0.10/libexec/openjdk.jdk/Contents/Home/bin/javac</executable>
 					<release>21</release>
 					<annotationProcessorPaths>
 						<path>
