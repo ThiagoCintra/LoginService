@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
 
 import com.br.itau.login.domains.UserRepositoryDomain;
 import com.br.itau.login.model.SessionDTO;
@@ -14,6 +15,7 @@ import com.br.itau.login.model.entity.UserAccount;
 import com.br.itau.login.model.request.LoginRequest;
 import com.br.itau.login.model.response.AuthResponse;
 
+@Service
 public class LoginServiceImpl implements LoginService {
 
 	private final AuthenticationManager authenticationManager;
@@ -30,7 +32,7 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public ResponseEntity login(LoginRequest loginRequest) {
+	public ResponseEntity<AuthResponse> login(LoginRequest loginRequest) {
 
 		Authentication auth = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));

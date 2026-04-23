@@ -51,11 +51,11 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Add H2 for tests so Spring Boot can configure an embedded datasource during unit/integration tests -->
+		<!-- Add H2 for runtime so the in-memory datasource configured in application.yaml can start locally -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<scope>test</scope>
+			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
