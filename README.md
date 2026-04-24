@@ -376,10 +376,9 @@ Os scripts estão na pasta [`tests/`](tests/):
 | Spring Boot | 4.0.5 | Framework principal |
 | Spring Security | 6+ | Autenticação e autorização |
 | JWT (jjwt) | 0.11.5 | Tokens de autenticação stateless |
-| Redis | 7+ | Store de sessões |
+| Redis | 7+ | Store de sessões e rate limiting distribuído |
 | H2 | — | Banco em memória (DEV) |
 | PostgreSQL | — | Banco relacional (produção) |
-| Bucket4j | 7.6.0 | Rate limiting |
 | MapStruct | 1.5.5 | Mapeamento de DTOs |
 | Lombok | 1.18.32 | Redução de boilerplate |
 | Docker | 20+ | Containerização do Redis |
