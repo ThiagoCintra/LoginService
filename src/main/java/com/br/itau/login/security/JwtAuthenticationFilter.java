@@ -26,7 +26,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-
 	private final JwtService jwtService;
 	private final SessionService sessionService;
 
@@ -38,13 +37,39 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-
-		// Bearer token authentication is disabled for this deployment.
-		// The JwtAuthenticationFilter logic (reading the Authorization header, parsing JWT, and
-		// setting the SecurityContext) has been intentionally skipped/commented out.
-		// If you need to re-enable JWT processing later, restore the original implementation.
-
+		String header = request.getHeader("Authorization");
+		if (header != null && header.startsWith("Bearer ")) {
+			String token = header.substring(7);
+			try {
+				if (jwtService.isTokenValid(token)) {
+					Claims claims = jwtService.getClaims(token);
+					String username = claims.getSubject();
+					String sessionId = claims.get("sessionId", String.class);
+					Boolean contractService = claims.get("contractService", Boolean.class);
+					SessionDTO session = sessionService.find(sessionId);
+					if (Objects.isNull(session)) {
+						SecurityContextHolder.clearContext();
+					} else {
+						List<GrantedAuthority> authorities = new ArrayList<>();
+						if (Objects.nonNull(session.getRole())) {
+							authorities.add(new SimpleGrantedAuthority("ROLE_" + session.getRole()));
+						}
+						UserDetails userDetails = User.withUsername(username).password("").authorities(authorities)
+								.build();
+						UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails,
+								null, userDetails.getAuthorities());
+						auth.setDetails(session);
+						
+						
+						if (Objects.nonNull(SecurityContextHolder.getContext().getAuthentication())) {
+						    SecurityContextHolder.getContext().setAuthentication(auth);
+						}
+					}
+				}
+			} catch (Exception ex) {
+				SecurityContextHolder.clearContext();
+			}
+		}
 		filterChain.doFilter(request, response);
 	}
-
 }

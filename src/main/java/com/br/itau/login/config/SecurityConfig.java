@@ -35,12 +35,12 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-			http.csrf(csrf -> csrf.disable())
-					.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-					.authorizeHttpRequests(auth -> auth
-							.requestMatchers("/auth2/login").permitAll());
-					// Token-based filter disabled because this deployment does not expect Bearer tokens.
-					// to re-enable: .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+		http.csrf(csrf -> csrf.disable())
+				.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authorizeHttpRequests(
+						auth -> auth.requestMatchers("/auth/login").permitAll().anyRequest().authenticated())
+
+				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 		return http.build();
 	}
 }

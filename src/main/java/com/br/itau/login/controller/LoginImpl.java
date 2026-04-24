@@ -15,7 +15,6 @@ import com.br.itau.login.service.LoginService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/auth2")
 public class LoginImpl implements Login {
 
 	private final LoginService loginService;
@@ -26,15 +25,8 @@ public class LoginImpl implements Login {
 	}
 
 	@Override
-	@PostMapping("/login")
 	public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
-		logger.info("Login request for user={}", loginRequest.getUsername());
-		try {
-			return loginService.login(loginRequest);
-		} catch (Throwable t) {
-			logger.error("Error while processing login", t);
-			throw t;
-		}
+		return loginService.login(loginRequest);
 	}
 
 }

@@ -2954,3 +2954,783 @@ Identify and stop the process that's listening on port 8081 or configure this ap
 2026-04-23 23:44:34.464  INFO [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-04-23 23:44:34.469  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2026-04-23 23:44:34.473  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-23 21:05:48.148  INFO [main] c.b.i.l.LoginApplication - Starting LoginApplication using Java 21.0.10 with PID 13717 (/Users/thiagocintra/Documents/gitdevelopment/itau/LoginService/target/classes started by thiagocintra in /Users/thiagocintra/Documents/gitdevelopment/itau/LoginService)
+2026-04-23 21:05:48.153  INFO [main] c.b.i.l.LoginApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 21:05:48.545  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:05:48.545  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 21:05:48.622  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 71 ms. Found 1 JPA repository interface.
+2026-04-23 21:05:48.661  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:05:48.665  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-23 21:05:48.690  INFO [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.br.itau.login.repository.UserAccountRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-23 21:05:48.691  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 10 ms. Found 0 Redis repository interfaces.
+2026-04-23 21:05:49.161  INFO [main] o.s.b.t.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-04-23 21:05:49.172  INFO [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2026-04-23 21:05:49.172  INFO [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23 21:05:49.203  INFO [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1027 ms
+2026-04-23 21:05:49.286  WARN [main] i.n.r.d.DnsServerAddressStreamProviders - Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2026-04-23 21:05:49.548  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 21:05:49.582  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 21:05:49.789  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 21:05:49.807  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 21:05:49.901  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:alunos_db user=SA
+2026-04-23 21:05:49.902  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 21:05:49.944  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:alunos_db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ALUNOS_DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 21:05:50.357  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 21:05:50.359  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 21:05:50.391  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:05:50.442  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 21:05:50.546  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 21:05:51.034  WARN [main] o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-04-23 21:05:51.036  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:05:51.038  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 21:05:51.039  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-23 21:05:51.045  INFO [main] o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-04-23 21:05:51.051 ERROR [main] o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+2026-04-23 21:06:00.046  INFO [main] c.b.i.l.LoginApplication - Starting LoginApplication using Java 21.0.10 with PID 13725 (/Users/thiagocintra/Documents/gitdevelopment/itau/LoginService/target/classes started by thiagocintra in /Users/thiagocintra/Documents/gitdevelopment/itau/LoginService)
+2026-04-23 21:06:00.048  INFO [main] c.b.i.l.LoginApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 21:06:00.387  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:06:00.388  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 21:06:00.461  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 67 ms. Found 1 JPA repository interface.
+2026-04-23 21:06:00.482  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:06:00.483  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-23 21:06:00.493  INFO [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.br.itau.login.repository.UserAccountRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-23 21:06:00.493  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2026-04-23 21:06:00.809  INFO [main] o.s.b.t.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-04-23 21:06:00.816  INFO [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2026-04-23 21:06:00.817  INFO [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23 21:06:00.843  INFO [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 773 ms
+2026-04-23 21:06:00.922  WARN [main] i.n.r.d.DnsServerAddressStreamProviders - Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2026-04-23 21:06:01.157  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 21:06:01.182  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 21:06:01.369  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 21:06:01.384  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 21:06:01.471  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:alunos_db user=SA
+2026-04-23 21:06:01.472  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 21:06:01.509  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:alunos_db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ALUNOS_DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 21:06:01.885  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 21:06:01.887  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 21:06:01.916  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:06:01.957  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 21:06:02.052  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 21:06:02.509  WARN [main] o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-04-23 21:06:02.515  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:06:02.516  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 21:06:02.517  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-23 21:06:02.522  INFO [main] o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-04-23 21:06:02.528 ERROR [main] o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+2026-04-23 21:07:21.465  INFO [main] c.b.i.l.LoginApplication - Starting LoginApplication using Java 21.0.10 with PID 13823 (/Users/thiagocintra/Documents/gitdevelopment/itau/LoginService/target/classes started by thiagocintra in /Users/thiagocintra/Documents/gitdevelopment/itau/LoginService)
+2026-04-23 21:07:21.467  INFO [main] c.b.i.l.LoginApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 21:07:21.783  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:07:21.784  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 21:07:21.855  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 67 ms. Found 1 JPA repository interface.
+2026-04-23 21:07:21.886  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:07:21.887  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-23 21:07:21.896  INFO [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.br.itau.login.repository.UserAccountRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-23 21:07:21.896  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
+2026-04-23 21:07:22.181  INFO [main] o.s.b.t.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-04-23 21:07:22.189  INFO [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2026-04-23 21:07:22.189  INFO [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23 21:07:22.211  INFO [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 723 ms
+2026-04-23 21:07:22.294  WARN [main] i.n.r.d.DnsServerAddressStreamProviders - Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2026-04-23 21:07:22.556  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 21:07:22.592  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 21:07:22.796  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 21:07:22.813  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 21:07:22.916  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:alunos_db user=SA
+2026-04-23 21:07:22.917  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 21:07:22.946  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:alunos_db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ALUNOS_DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 21:07:23.336  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 21:07:23.338  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 21:07:23.365  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:07:23.411  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 21:07:23.510  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 21:07:23.907  INFO [main] o.s.b.t.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/api/v1'
+2026-04-23 21:07:23.910  INFO [main] c.b.i.l.LoginApplication - Started LoginApplication in 2.648 seconds (process running for 2.824)
+2026-04-23 21:07:34.978  INFO [http-nio-8081-exec-1] o.a.c.c.C.[.[.[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-23 21:07:34.979  INFO [http-nio-8081-exec-1] o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-23 21:07:34.980  INFO [http-nio-8081-exec-1] o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
+2026-04-23 21:07:35.042  INFO [http-nio-8081-exec-1] c.b.i.l.c.LoginImpl - Login request for user=Thiago
+2026-04-23 21:09:34.790  INFO [main] c.b.i.l.LoginApplication - Starting LoginApplication using Java 21.0.10 with PID 14015 (/Users/thiagocintra/Documents/gitdevelopment/itau/LoginService/target/classes started by thiagocintra in /Users/thiagocintra/Documents/gitdevelopment/itau/LoginService)
+2026-04-23 21:09:34.793  INFO [main] c.b.i.l.LoginApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 21:09:35.300  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:09:35.301  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 21:09:35.388  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 81 ms. Found 1 JPA repository interface.
+2026-04-23 21:09:35.415  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:09:35.416  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-23 21:09:35.428  INFO [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.br.itau.login.repository.UserAccountRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-23 21:09:35.428  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2026-04-23 21:09:35.762  INFO [main] o.s.b.t.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-04-23 21:09:35.772  INFO [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2026-04-23 21:09:35.773  INFO [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23 21:09:35.805  INFO [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 990 ms
+2026-04-23 21:09:35.899  WARN [main] i.n.r.d.DnsServerAddressStreamProviders - Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2026-04-23 21:09:36.155  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 21:09:36.191  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 21:09:36.403  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 21:09:36.422  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 21:09:36.524  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:alunos_db user=SA
+2026-04-23 21:09:36.526  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 21:09:36.565  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:alunos_db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ALUNOS_DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 21:09:36.986  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 21:09:36.988  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 21:09:37.022  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:09:37.077  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 21:09:37.182  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 21:09:37.687  WARN [main] o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-04-23 21:09:37.689  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:09:37.690  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 21:09:37.691  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-23 21:09:37.698  INFO [main] o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-04-23 21:09:37.703 ERROR [main] o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+2026-04-23 21:09:56.704  INFO [http-nio-8081-exec-2] c.b.i.l.c.LoginImpl - Login request for user=Thiago
+2026-04-23 21:10:13.380  INFO [SpringApplicationShutdownHook] o.s.b.t.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-23 21:10:13.400  INFO [tomcat-shutdown] o.s.b.t.GracefulShutdown - Graceful shutdown complete
+2026-04-23 21:10:13.520  INFO [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:10:13.522  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 21:10:13.523  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-23 21:37:21.507  INFO [main] c.b.i.l.LoginApplication - Starting LoginApplication using Java 21.0.10 with PID 14979 (/Users/thiagocintra/Documents/gitdevelopment/itau/LoginService/target/classes started by thiagocintra in /Users/thiagocintra/Documents/gitdevelopment/itau/LoginService)
+2026-04-23 21:37:21.517  INFO [main] c.b.i.l.LoginApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 21:37:21.895  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:37:21.896  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 21:37:21.983  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 78 ms. Found 1 JPA repository interface.
+2026-04-23 21:37:22.007  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:37:22.008  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-23 21:37:22.019  INFO [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.br.itau.login.repository.UserAccountRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-23 21:37:22.019  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2026-04-23 21:37:22.334  INFO [main] o.s.b.t.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-04-23 21:37:22.347  INFO [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2026-04-23 21:37:22.347  INFO [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23 21:37:22.377  INFO [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 838 ms
+2026-04-23 21:37:22.457  WARN [main] i.n.r.d.DnsServerAddressStreamProviders - Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2026-04-23 21:37:22.725  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 21:37:22.759  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 21:37:22.961  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 21:37:22.978  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 21:37:23.081  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:alunos_db user=SA
+2026-04-23 21:37:23.082  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 21:37:23.120  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:alunos_db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ALUNOS_DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 21:37:23.528  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 21:37:23.530  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 21:37:23.560  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:37:23.615  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 21:37:23.786  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 21:37:24.184  INFO [main] o.s.b.t.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/api/v1'
+2026-04-23 21:37:24.188  INFO [main] c.b.i.l.LoginApplication - Started LoginApplication in 2.937 seconds (process running for 3.241)
+2026-04-23 21:37:31.773  INFO [http-nio-8081-exec-2] o.a.c.c.C.[.[.[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-23 21:37:31.774  INFO [http-nio-8081-exec-2] o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-23 21:37:31.777  INFO [http-nio-8081-exec-2] o.s.w.s.DispatcherServlet - Completed initialization in 3 ms
+2026-04-23 21:37:44.513  INFO [SpringApplicationShutdownHook] o.s.b.t.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-23 21:37:44.520  INFO [tomcat-shutdown] o.s.b.t.GracefulShutdown - Graceful shutdown complete
+2026-04-23 21:37:44.639  INFO [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:37:44.642  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 21:37:44.643  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-23 21:37:54.044  INFO [main] c.b.i.l.LoginApplication - Starting LoginApplication using Java 21.0.10 with PID 14993 (/Users/thiagocintra/Documents/gitdevelopment/itau/LoginService/target/classes started by thiagocintra in /Users/thiagocintra/Documents/gitdevelopment/itau/LoginService)
+2026-04-23 21:37:54.050  INFO [main] c.b.i.l.LoginApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 21:37:54.392  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:37:54.393  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 21:37:54.466  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 68 ms. Found 1 JPA repository interface.
+2026-04-23 21:37:54.488  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:37:54.488  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-23 21:37:54.501  INFO [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.br.itau.login.repository.UserAccountRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-23 21:37:54.501  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2026-04-23 21:37:54.807  INFO [main] o.s.b.t.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-04-23 21:37:54.815  INFO [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2026-04-23 21:37:54.816  INFO [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23 21:37:54.843  INFO [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 767 ms
+2026-04-23 21:37:54.922  WARN [main] i.n.r.d.DnsServerAddressStreamProviders - Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2026-04-23 21:37:55.163  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 21:37:55.189  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 21:37:55.381  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 21:37:55.396  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 21:37:55.487  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:alunos_db user=SA
+2026-04-23 21:37:55.487  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 21:37:55.523  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:alunos_db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ALUNOS_DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 21:37:55.899  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 21:37:55.901  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 21:37:55.931  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:37:55.986  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 21:37:56.079  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 21:37:56.471  INFO [main] o.s.b.t.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/api/v1'
+2026-04-23 21:37:56.476  INFO [main] c.b.i.l.LoginApplication - Started LoginApplication in 2.67 seconds (process running for 2.876)
+2026-04-23 21:38:03.031  INFO [http-nio-8081-exec-1] o.a.c.c.C.[.[.[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-23 21:38:03.031  INFO [http-nio-8081-exec-1] o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-23 21:38:03.032  INFO [http-nio-8081-exec-1] o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
+2026-04-23 21:38:12.640  INFO [SpringApplicationShutdownHook] o.s.b.t.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-23 21:38:12.649  INFO [tomcat-shutdown] o.s.b.t.GracefulShutdown - Graceful shutdown complete
+2026-04-23 21:38:12.790  INFO [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:38:12.793  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 21:38:12.794  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-23 21:38:55.516  INFO [main] c.b.i.l.LoginApplication - Starting LoginApplication using Java 21.0.10 with PID 15016 (/Users/thiagocintra/Documents/gitdevelopment/itau/LoginService/target/classes started by thiagocintra in /Users/thiagocintra/Documents/gitdevelopment/itau/LoginService)
+2026-04-23 21:38:55.521  INFO [main] c.b.i.l.LoginApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 21:38:55.963  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:38:55.963  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 21:38:56.046  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 72 ms. Found 1 JPA repository interface.
+2026-04-23 21:38:56.071  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:38:56.071  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-23 21:38:56.083  INFO [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.br.itau.login.repository.UserAccountRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-23 21:38:56.083  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2026-04-23 21:38:56.400  INFO [main] o.s.b.t.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-04-23 21:38:56.409  INFO [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2026-04-23 21:38:56.409  INFO [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23 21:38:56.435  INFO [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 888 ms
+2026-04-23 21:38:56.511  WARN [main] i.n.r.d.DnsServerAddressStreamProviders - Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2026-04-23 21:38:56.767  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 21:38:56.799  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 21:38:57.005  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 21:38:57.023  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 21:38:57.116  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:alunos_db user=SA
+2026-04-23 21:38:57.117  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 21:38:57.154  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:alunos_db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ALUNOS_DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 21:38:57.559  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 21:38:57.561  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 21:38:57.592  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:38:57.654  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 21:38:57.761  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 21:38:58.117  INFO [main] o.s.b.t.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/api/v1'
+2026-04-23 21:38:58.121  INFO [main] c.b.i.l.LoginApplication - Started LoginApplication in 2.849 seconds (process running for 3.143)
+2026-04-23 21:38:59.191  INFO [SpringApplicationShutdownHook] o.s.b.t.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-23 21:38:59.197  INFO [tomcat-shutdown] o.s.b.t.GracefulShutdown - Graceful shutdown complete
+2026-04-23 21:38:59.312  INFO [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:38:59.314  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 21:38:59.316  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-23 21:39:15.416  INFO [main] c.b.i.l.LoginApplication - Starting LoginApplication using Java 21.0.10 with PID 15028 (/Users/thiagocintra/Documents/gitdevelopment/itau/LoginService/target/classes started by thiagocintra in /Users/thiagocintra/Documents/gitdevelopment/itau/LoginService)
+2026-04-23 21:39:15.424  INFO [main] c.b.i.l.LoginApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 21:39:15.794  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:39:15.795  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 21:39:15.877  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 76 ms. Found 1 JPA repository interface.
+2026-04-23 21:39:15.900  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:39:15.900  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-23 21:39:15.911  INFO [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.br.itau.login.repository.UserAccountRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-23 21:39:15.911  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2026-04-23 21:39:16.233  INFO [main] o.s.b.t.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-04-23 21:39:16.243  INFO [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2026-04-23 21:39:16.243  INFO [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23 21:39:16.272  INFO [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 819 ms
+2026-04-23 21:39:16.353  WARN [main] i.n.r.d.DnsServerAddressStreamProviders - Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2026-04-23 21:39:16.598  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 21:39:16.631  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 21:39:16.829  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 21:39:16.846  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 21:39:16.939  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:alunos_db user=SA
+2026-04-23 21:39:16.940  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 21:39:16.981  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:alunos_db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ALUNOS_DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 21:39:17.372  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 21:39:17.374  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 21:39:17.405  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:39:17.461  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 21:39:17.559  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 21:39:17.919  INFO [main] o.s.b.t.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/api/v1'
+2026-04-23 21:39:17.924  INFO [main] c.b.i.l.LoginApplication - Started LoginApplication in 2.754 seconds (process running for 3.038)
+2026-04-23 21:39:20.319  INFO [http-nio-8081-exec-2] o.a.c.c.C.[.[.[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-23 21:39:20.319  INFO [http-nio-8081-exec-2] o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-23 21:39:20.329  INFO [http-nio-8081-exec-2] o.s.w.s.DispatcherServlet - Completed initialization in 10 ms
+2026-04-23 21:39:45.869  INFO [SpringApplicationShutdownHook] o.s.b.t.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-23 21:39:45.879  INFO [tomcat-shutdown] o.s.b.t.GracefulShutdown - Graceful shutdown complete
+2026-04-23 21:39:46.001  INFO [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:39:46.004  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 21:39:46.005  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-23 21:44:35.138  INFO [main] c.b.i.l.LoginApplication - Starting LoginApplication using Java 21.0.10 with PID 15186 (/Users/thiagocintra/Documents/gitdevelopment/itau/LoginService/target/classes started by thiagocintra in /Users/thiagocintra/Documents/gitdevelopment/itau/LoginService)
+2026-04-23 21:44:35.141  INFO [main] c.b.i.l.LoginApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 21:44:35.654  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:44:35.655  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 21:44:35.747  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 86 ms. Found 1 JPA repository interface.
+2026-04-23 21:44:35.780  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:44:35.782  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-23 21:44:35.794  INFO [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.br.itau.login.repository.UserAccountRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-23 21:44:35.795  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2026-04-23 21:44:36.153  INFO [main] o.s.b.t.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-04-23 21:44:36.164  INFO [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2026-04-23 21:44:36.164  INFO [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23 21:44:36.198  INFO [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 1022 ms
+2026-04-23 21:44:36.294  WARN [main] i.n.r.d.DnsServerAddressStreamProviders - Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2026-04-23 21:44:36.584  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 21:44:36.620  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 21:44:36.858  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 21:44:36.877  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 21:44:37.004  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:alunos_db user=SA
+2026-04-23 21:44:37.005  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 21:44:37.044  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:alunos_db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ALUNOS_DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 21:44:37.511  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 21:44:37.513  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 21:44:37.549  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:44:37.591  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 21:44:37.700  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 21:44:55.089  INFO [main] o.s.b.t.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/api/v1'
+2026-04-23 21:44:55.095  INFO [main] c.b.i.l.LoginApplication - Started LoginApplication in 20.321 seconds (process running for 20.936)
+2026-04-23 21:45:00.362  INFO [http-nio-8081-exec-2] o.a.c.c.C.[.[.[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-23 21:45:00.362  INFO [http-nio-8081-exec-2] o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-23 21:45:00.366  INFO [http-nio-8081-exec-2] o.s.w.s.DispatcherServlet - Completed initialization in 4 ms
+2026-04-23 21:45:23.993  INFO [main] c.b.i.l.LoginApplication - Starting LoginApplication using Java 21.0.10 with PID 15245 (/Users/thiagocintra/Documents/gitdevelopment/itau/LoginService/target/classes started by thiagocintra in /Users/thiagocintra/Documents/gitdevelopment/itau/LoginService)
+2026-04-23 21:45:23.999  INFO [main] c.b.i.l.LoginApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 21:45:24.397  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:45:24.398  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 21:45:24.477  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 74 ms. Found 1 JPA repository interface.
+2026-04-23 21:45:24.502  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:45:24.503  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-23 21:45:24.514  INFO [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.br.itau.login.repository.UserAccountRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-23 21:45:24.514  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2026-04-23 21:45:24.836  INFO [main] o.s.b.t.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-04-23 21:45:24.848  INFO [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2026-04-23 21:45:24.848  INFO [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23 21:45:24.877  INFO [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 851 ms
+2026-04-23 21:45:24.957  WARN [main] i.n.r.d.DnsServerAddressStreamProviders - Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2026-04-23 21:45:25.209  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 21:45:25.242  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 21:45:25.456  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 21:45:25.474  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 21:45:25.570  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:alunos_db user=SA
+2026-04-23 21:45:25.571  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 21:45:25.611  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:alunos_db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ALUNOS_DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 21:45:26.018  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 21:45:26.019  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 21:45:26.051  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:45:26.156  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 21:45:26.270  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 21:45:26.706  INFO [main] o.s.b.t.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/api/v1'
+2026-04-23 21:45:26.711  INFO [main] c.b.i.l.LoginApplication - Started LoginApplication in 2.978 seconds (process running for 3.246)
+2026-04-23 21:45:29.053  INFO [http-nio-8081-exec-1] o.a.c.c.C.[.[.[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-23 21:45:29.053  INFO [http-nio-8081-exec-1] o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-23 21:45:29.054  INFO [http-nio-8081-exec-1] o.s.w.s.DispatcherServlet - Completed initialization in 0 ms
+2026-04-23 21:46:09.458  INFO [SpringApplicationShutdownHook] o.s.b.t.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-23 21:46:09.474  INFO [tomcat-shutdown] o.s.b.t.GracefulShutdown - Graceful shutdown complete
+2026-04-23 21:46:09.600  INFO [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:46:09.603  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 21:46:09.605  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-23 21:47:04.286  INFO [main] c.b.i.l.LoginApplication - Starting LoginApplication using Java 21.0.10 with PID 15298 (/Users/thiagocintra/Documents/gitdevelopment/itau/LoginService/target/classes started by thiagocintra in /Users/thiagocintra/Documents/gitdevelopment/itau/LoginService)
+2026-04-23 21:47:04.291  INFO [main] c.b.i.l.LoginApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 21:47:04.727  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:47:04.728  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 21:47:04.815  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 80 ms. Found 1 JPA repository interface.
+2026-04-23 21:47:04.843  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:47:04.844  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-23 21:47:04.855  INFO [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.br.itau.login.repository.UserAccountRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-23 21:47:04.856  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2026-04-23 21:47:05.207  INFO [main] o.s.b.t.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-04-23 21:47:05.216  INFO [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2026-04-23 21:47:05.217  INFO [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23 21:47:05.246  INFO [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 922 ms
+2026-04-23 21:47:05.355  WARN [main] i.n.r.d.DnsServerAddressStreamProviders - Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2026-04-23 21:47:05.663  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 21:47:05.700  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 21:47:05.941  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 21:47:05.962  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 21:47:06.076  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:alunos_db user=SA
+2026-04-23 21:47:06.077  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 21:47:06.113  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:alunos_db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ALUNOS_DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 21:47:06.588  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 21:47:06.590  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 21:47:06.626  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:47:06.670  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 21:47:06.781  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 21:47:07.186  INFO [main] o.s.b.t.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/api/v1'
+2026-04-23 21:47:07.191  INFO [main] c.b.i.l.LoginApplication - Started LoginApplication in 3.203 seconds (process running for 3.662)
+2026-04-23 21:47:12.456  INFO [http-nio-8081-exec-2] o.a.c.c.C.[.[.[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-23 21:47:12.457  INFO [http-nio-8081-exec-2] o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-23 21:47:12.458  INFO [http-nio-8081-exec-2] o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
+2026-04-23 21:49:00.017  INFO [main] c.b.i.l.LoginApplication - Starting LoginApplication using Java 21.0.10 with PID 15350 (/Users/thiagocintra/Documents/gitdevelopment/itau/LoginService/target/classes started by thiagocintra in /Users/thiagocintra/Documents/gitdevelopment/itau/LoginService)
+2026-04-23 21:49:00.022  INFO [main] c.b.i.l.LoginApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 21:49:00.456  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:49:00.457  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 21:49:00.549  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 86 ms. Found 1 JPA repository interface.
+2026-04-23 21:49:00.578  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:49:00.579  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-23 21:49:00.591  INFO [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.br.itau.login.repository.UserAccountRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-23 21:49:00.591  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2026-04-23 21:49:00.943  INFO [main] o.s.b.t.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-04-23 21:49:00.953  INFO [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2026-04-23 21:49:00.954  INFO [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23 21:49:00.983  INFO [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 930 ms
+2026-04-23 21:49:01.080  WARN [main] i.n.r.d.DnsServerAddressStreamProviders - Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2026-04-23 21:49:01.365  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 21:49:01.402  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 21:49:01.788  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 21:49:01.823  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 21:49:01.997  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:alunos_db user=SA
+2026-04-23 21:49:01.999  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 21:49:02.073  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:alunos_db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ALUNOS_DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 21:49:02.767  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 21:49:02.772  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 21:49:02.816  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:49:02.864  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 21:49:03.013  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 21:49:03.487  INFO [main] o.s.b.t.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/api/v1'
+2026-04-23 21:49:03.491  INFO [main] c.b.i.l.LoginApplication - Started LoginApplication in 3.764 seconds (process running for 4.263)
+2026-04-23 21:49:06.865  INFO [http-nio-8081-exec-3] o.a.c.c.C.[.[.[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-23 21:49:06.865  INFO [http-nio-8081-exec-3] o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-23 21:49:06.868  INFO [http-nio-8081-exec-3] o.s.w.s.DispatcherServlet - Completed initialization in 3 ms
+2026-04-23 21:50:17.398  INFO [main] c.b.i.l.LoginApplication - Starting LoginApplication using Java 21.0.10 with PID 15431 (/Users/thiagocintra/Documents/gitdevelopment/itau/LoginService/target/classes started by thiagocintra in /Users/thiagocintra/Documents/gitdevelopment/itau/LoginService)
+2026-04-23 21:50:17.402  INFO [main] c.b.i.l.LoginApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 21:50:17.772  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:50:17.773  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 21:50:17.860  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 72 ms. Found 1 JPA repository interface.
+2026-04-23 21:50:17.887  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:50:17.888  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-23 21:50:17.899  INFO [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.br.itau.login.repository.UserAccountRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-23 21:50:17.900  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2026-04-23 21:50:18.248  INFO [main] o.s.b.t.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-04-23 21:50:18.258  INFO [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2026-04-23 21:50:18.258  INFO [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23 21:50:18.286  INFO [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 861 ms
+2026-04-23 21:50:18.366  WARN [main] i.n.r.d.DnsServerAddressStreamProviders - Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2026-04-23 21:50:18.601  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 21:50:18.633  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 21:50:18.838  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 21:50:18.861  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 21:50:18.954  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:alunos_db user=SA
+2026-04-23 21:50:18.954  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 21:50:18.992  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:alunos_db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ALUNOS_DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 21:50:19.379  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 21:50:19.381  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 21:50:19.411  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:50:19.449  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 21:50:19.543  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 21:50:19.951  INFO [main] o.s.b.t.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/api/v1'
+2026-04-23 21:50:19.955  INFO [main] c.b.i.l.LoginApplication - Started LoginApplication in 2.819 seconds (process running for 3.105)
+2026-04-23 21:50:22.781  INFO [http-nio-8081-exec-2] o.a.c.c.C.[.[.[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-23 21:50:22.782  INFO [http-nio-8081-exec-2] o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-23 21:50:22.783  INFO [http-nio-8081-exec-2] o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
+2026-04-23 21:50:39.569  INFO [SpringApplicationShutdownHook] o.s.b.t.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-23 21:50:39.606  INFO [tomcat-shutdown] o.s.b.t.GracefulShutdown - Graceful shutdown complete
+2026-04-23 21:50:39.731  INFO [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:50:39.736  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 21:50:39.737  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-23 21:50:44.896  INFO [main] c.b.i.l.LoginApplication - Starting LoginApplication using Java 21.0.10 with PID 15546 (/Users/thiagocintra/Documents/gitdevelopment/itau/LoginService/target/classes started by thiagocintra in /Users/thiagocintra/Documents/gitdevelopment/itau/LoginService)
+2026-04-23 21:50:44.901  INFO [main] c.b.i.l.LoginApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 21:50:45.293  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:50:45.294  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 21:50:45.390  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 86 ms. Found 1 JPA repository interface.
+2026-04-23 21:50:45.417  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:50:45.418  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-23 21:50:45.430  INFO [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.br.itau.login.repository.UserAccountRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-23 21:50:45.430  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2026-04-23 21:50:45.753  INFO [main] o.s.b.t.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-04-23 21:50:45.763  INFO [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2026-04-23 21:50:45.763  INFO [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23 21:50:45.790  INFO [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 863 ms
+2026-04-23 21:50:45.870  WARN [main] i.n.r.d.DnsServerAddressStreamProviders - Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2026-04-23 21:50:46.105  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 21:50:46.137  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 21:50:46.334  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 21:50:46.351  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 21:50:46.447  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:alunos_db user=SA
+2026-04-23 21:50:46.447  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 21:50:46.484  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:alunos_db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ALUNOS_DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 21:50:46.879  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 21:50:46.880  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 21:50:46.912  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:50:46.966  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 21:50:47.063  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 21:50:47.421  INFO [main] o.s.b.t.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/api/v1'
+2026-04-23 21:50:47.426  INFO [main] c.b.i.l.LoginApplication - Started LoginApplication in 2.793 seconds (process running for 3.071)
+2026-04-23 21:50:52.117  INFO [http-nio-8081-exec-2] o.a.c.c.C.[.[.[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-23 21:50:52.117  INFO [http-nio-8081-exec-2] o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-23 21:50:52.121  INFO [http-nio-8081-exec-2] o.s.w.s.DispatcherServlet - Completed initialization in 4 ms
+2026-04-23 21:52:46.164  INFO [main] c.b.i.l.LoginApplication - Starting LoginApplication using Java 21.0.10 with PID 15642 (/Users/thiagocintra/Documents/gitdevelopment/itau/LoginService/target/classes started by thiagocintra in /Users/thiagocintra/Documents/gitdevelopment/itau/LoginService)
+2026-04-23 21:52:46.166  INFO [main] c.b.i.l.LoginApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 21:52:46.545  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:52:46.546  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 21:52:46.629  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 77 ms. Found 1 JPA repository interface.
+2026-04-23 21:52:46.653  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:52:46.654  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-23 21:52:46.665  INFO [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.br.itau.login.repository.UserAccountRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-23 21:52:46.665  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2026-04-23 21:52:46.979  INFO [main] o.s.b.t.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-04-23 21:52:46.993  INFO [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2026-04-23 21:52:46.994  INFO [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23 21:52:47.024  INFO [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 830 ms
+2026-04-23 21:52:47.104  WARN [main] i.n.r.d.DnsServerAddressStreamProviders - Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2026-04-23 21:52:47.349  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 21:52:47.385  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 21:52:47.598  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 21:52:47.616  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 21:52:47.715  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:alunos_db user=SA
+2026-04-23 21:52:47.716  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 21:52:47.755  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:alunos_db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ALUNOS_DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 21:52:48.154  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 21:52:48.156  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 21:52:48.187  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:52:48.238  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 21:52:48.339  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 21:52:48.821  WARN [main] o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-04-23 21:52:48.823  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:52:48.825  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 21:52:48.829  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-23 21:52:48.835  INFO [main] o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-04-23 21:52:48.850 ERROR [main] o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+2026-04-23 21:52:53.724  INFO [SpringApplicationShutdownHook] o.s.b.t.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-23 21:52:53.746  INFO [tomcat-shutdown] o.s.b.t.GracefulShutdown - Graceful shutdown complete
+2026-04-23 21:52:53.867  INFO [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:52:53.870  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 21:52:53.872  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-04-23 21:52:57.576  INFO [main] c.b.i.l.LoginApplication - Starting LoginApplication using Java 21.0.10 with PID 15647 (/Users/thiagocintra/Documents/gitdevelopment/itau/LoginService/target/classes started by thiagocintra in /Users/thiagocintra/Documents/gitdevelopment/itau/LoginService)
+2026-04-23 21:52:57.578  INFO [main] c.b.i.l.LoginApplication - No active profile set, falling back to 1 default profile: "default"
+2026-04-23 21:52:57.908  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:52:57.909  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-23 21:52:57.986  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 71 ms. Found 1 JPA repository interface.
+2026-04-23 21:52:58.009  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-23 21:52:58.009  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2026-04-23 21:52:58.019  INFO [main] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.br.itau.login.repository.UserAccountRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2026-04-23 21:52:58.019  INFO [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2026-04-23 21:52:58.323  INFO [main] o.s.b.t.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-04-23 21:52:58.332  INFO [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2026-04-23 21:52:58.332  INFO [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-23 21:52:58.357  INFO [main] o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 757 ms
+2026-04-23 21:52:58.431  WARN [main] i.n.r.d.DnsServerAddressStreamProviders - Can not find io.netty.resolver.dns.macos.MacOSDnsServerAddressStreamProvider in the classpath, fallback to system defaults. This may result in incorrect DNS resolutions on MacOS. Check whether you have a dependency on 'io.netty:netty-resolver-dns-native-macos'
+2026-04-23 21:52:58.662  INFO [main] o.h.o.jpa - HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-04-23 21:52:58.688  INFO [main] o.h.o.core - HHH000001: Hibernate ORM core version 7.2.7.Final
+2026-04-23 21:52:58.869  INFO [main] o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-23 21:52:58.884  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2026-04-23 21:52:58.969  INFO [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:alunos_db user=SA
+2026-04-23 21:52:58.970  INFO [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2026-04-23 21:52:59.005  INFO [main] o.h.o.c.pooling - HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:alunos_db]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: ALUNOS_DB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-04-23 21:52:59.381  INFO [main] o.h.o.core - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-04-23 21:52:59.382  INFO [main] o.h.o.j.batch - HHH100501: Automatic JDBC statement batching enabled (maximum batch size 100)
+2026-04-23 21:52:59.413  INFO [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:52:59.451  INFO [main] o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-23 21:52:59.543  INFO [main] o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-04-23 21:52:59.913  INFO [main] o.s.b.t.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/api/v1'
+2026-04-23 21:52:59.917  INFO [main] c.b.i.l.LoginApplication - Started LoginApplication in 2.564 seconds (process running for 2.749)
+2026-04-23 21:53:03.184  INFO [http-nio-8081-exec-2] o.a.c.c.C.[.[.[/api/v1] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-23 21:53:03.184  INFO [http-nio-8081-exec-2] o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-04-23 21:53:03.187  INFO [http-nio-8081-exec-2] o.s.w.s.DispatcherServlet - Completed initialization in 3 ms
+2026-04-23 21:53:11.116  INFO [SpringApplicationShutdownHook] o.s.b.t.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-04-23 21:53:11.128  INFO [tomcat-shutdown] o.s.b.t.GracefulShutdown - Graceful shutdown complete
+2026-04-23 21:53:11.258  INFO [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-04-23 21:53:11.260  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-04-23 21:53:11.261  INFO [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.

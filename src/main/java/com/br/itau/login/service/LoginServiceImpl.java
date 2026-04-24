@@ -2,6 +2,7 @@ package com.br.itau.login.service;
 
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.Objects;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,19 +16,18 @@ import com.br.itau.login.model.entity.UserAccount;
 import com.br.itau.login.model.request.LoginRequest;
 import com.br.itau.login.model.response.AuthResponse;
 
+import static com.br.itau.login.utils.SessionUtils.*;
+
 @Service
 public class LoginServiceImpl implements LoginService {
 
 	private final AuthenticationManager authenticationManager;
-	private final JwtService jwtService;
-	private final SessionService sessionService;
+	
 	private final UserRepositoryDomain userRepositoryPort;
 
 	public LoginServiceImpl(AuthenticationManager authenticationManager, JwtService jwtService,
 			SessionService sessionService, UserRepositoryDomain userRepositoryPort) {
 		this.authenticationManager = authenticationManager;
-		this.jwtService = jwtService;
-		this.sessionService = sessionService;
 		this.userRepositoryPort = userRepositoryPort;
 	}
 
@@ -40,26 +40,21 @@ public class LoginServiceImpl implements LoginService {
 		UserAccount userAccount = userRepositoryPort.findByUsername(loginRequest.getUsername()).orElse(null);
 		String roleName = userAccount != null && userAccount.getRole() != null ? userAccount.getRole().name() : null;
 
-		String sessionId = java.util.UUID.randomUUID().toString();
-		byte[] keyBytes = new byte[32];
-		new SecureRandom().nextBytes(keyBytes);
-		String symmetricKey = Base64.getEncoder().encodeToString(keyBytes);
-		SessionDTO session = null;
+		String sessionId = geraneteSessionId();
+		
+		String symmetricKey = generateSymmetricKey();
 
-		if (userAccount != null) {
-			session = new SessionDTO(sessionId, loginRequest.getUsername(), userAccount.getContractService(),
+		if (Objects.nonNull(userAccount)) {
+			SessionDTO	session = new SessionDTO(sessionId, loginRequest.getUsername(), userAccount.getContractService(),
 					symmetricKey, roleName);
-			sessionService.save(session, jwtService.getExpirationMs());
-
-			String token = jwtService.generateToken(loginRequest.getUsername(), sessionId, roleName,
-					userAccount.getContractService());
+			
+			saveSession(session);
+			String token = getSession(loginRequest, sessionId, roleName, userAccount);
 
 			return ResponseEntity.ok(new AuthResponse(token));
 		}else {
 			throw new RuntimeException("User not found");
 		}
-
-		
 
 	}
 
