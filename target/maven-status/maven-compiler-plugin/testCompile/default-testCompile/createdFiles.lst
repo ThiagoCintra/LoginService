@@ -1,5 +1,5 @@
-com/br/itau/login/service/JwtServiceImplTest.class
 com/br/itau/login/service/SessionServiceImplTest.class
+com/br/itau/login/service/JwtServiceImplTest.class
 com/br/itau/login/config/TestRedisConfig.class
 com/br/itau/login/LoginApplicationTests.class
 com/br/itau/login/service/LoginServiceImplTest.class
