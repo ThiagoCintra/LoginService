@@ -1,4 +1,4 @@
-package br.com.primeiros.passos.model.dto.error;
+package com.br.itau.login.model.response.errors;
 
 import java.time.LocalDateTime;
 

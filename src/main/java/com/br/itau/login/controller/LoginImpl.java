@@ -26,7 +26,7 @@ public class LoginImpl implements Login {
 
 	@Override
 	public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
-		return loginService.login(loginRequest);
+		return ResponseEntity.ok(loginService.login(loginRequest));
 	}
 
 }

@@ -7,5 +7,5 @@ import com.br.itau.login.model.response.AuthResponse;
 
 public interface LoginService {
 
-	ResponseEntity<AuthResponse> login(LoginRequest loginRequest);
+	AuthResponse login(LoginRequest loginRequest);
 }

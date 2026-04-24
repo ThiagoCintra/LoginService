@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+import com.br.itau.login.domains.UserRepositoryDomain;
 import com.br.itau.login.model.entity.UserAccount;
 import com.br.itau.login.model.enums.Role;
 import com.br.itau.login.repository.UserAccountRepository;
@@ -13,10 +14,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Component
 public class DataInitializer implements CommandLineRunner {
 
-    private final UserAccountRepository userRepository;
+    private final UserRepositoryDomain userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public DataInitializer(UserAccountRepository userRepository, PasswordEncoder passwordEncoder) {
+    public DataInitializer(UserRepositoryDomain userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }

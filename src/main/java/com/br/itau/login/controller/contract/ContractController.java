@@ -8,8 +8,7 @@ import com.br.itau.login.model.response.AuthResponse;
 
 @RequestMapping("/contract")
 public interface ContractController{
-
 	
 	@PostMapping
-	ResponseEntity<AuthResponse> login();
+	ResponseEntity contract();
 }

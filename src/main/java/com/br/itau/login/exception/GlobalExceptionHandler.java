@@ -9,7 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import br.com.primeiros.passos.model.dto.error.ErrorResponse;
+import com.br.itau.login.model.response.errors.ErrorResponse;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {

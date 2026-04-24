@@ -57,11 +57,13 @@ class LoginServiceImplTest {
 		when(jwtService.getExpirationMs()).thenReturn(60_000L);
 		when(jwtService.generateToken(any(), any(), any(), any())).thenReturn("jwt-token");
 
-		ResponseEntity<AuthResponse> response = loginService.login(request);
+		AuthResponse response = loginService.login(request);
+		
+		ResponseEntity<AuthResponse> responseEntity = ResponseEntity.ok(response);
 
-		assertThat(response.getStatusCode().value()).isEqualTo(200);
-		assertThat(response.getBody()).isNotNull();
-		assertThat(response.getBody().getToken()).isEqualTo("jwt-token");
+		assertThat(responseEntity.getStatusCode().value()).isEqualTo(200);
+		assertThat(responseEntity.getBody()).isNotNull();
+		assertThat(responseEntity.getBody().getToken()).isEqualTo("jwt-token");
 
 		verify(sessionService).save(any(), any(Long.class));
 	}
@@ -107,9 +109,11 @@ class LoginServiceImplTest {
 		when(jwtService.getExpirationMs()).thenReturn(60_000L);
 		when(jwtService.generateToken(any(), any(), any(), any())).thenReturn("jwt-token-no-role");
 
-		ResponseEntity<AuthResponse> response = loginService.login(request);
+		AuthResponse response = loginService.login(request);
+		
+		ResponseEntity<AuthResponse> responseEntity = ResponseEntity.ok(response);
 
-		assertThat(response.getStatusCode().value()).isEqualTo(200);
-		assertThat(response.getBody().getToken()).isEqualTo("jwt-token-no-role");
+		assertThat(responseEntity.getStatusCode().value()).isEqualTo(200);
+		assertThat(responseEntity.getBody().getToken()).isEqualTo("jwt-token-no-role");
 	}
 }

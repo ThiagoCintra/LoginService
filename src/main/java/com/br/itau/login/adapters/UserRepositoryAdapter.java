@@ -1,4 +1,4 @@
-package com.br.itau.login.adpters;
+package com.br.itau.login.adapters;
 
 import java.util.Optional;
 
@@ -15,8 +15,8 @@ public class UserRepositoryAdapter implements UserRepositoryDomain {
 	private final UserAccountRepository userAccountRepository;
 
 	@Autowired
-	public UserRepositoryAdapter(UserAccountRepository UserAccountRepository) {
-		this.userAccountRepository = UserAccountRepository;
+	public UserRepositoryAdapter(UserAccountRepository userAccountRepository) {
+		this.userAccountRepository = userAccountRepository;
 	}
 
 	@Override

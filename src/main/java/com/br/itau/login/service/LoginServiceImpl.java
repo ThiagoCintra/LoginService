@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.br.itau.login.domains.UserRepositoryDomain;
+import com.br.itau.login.exception.UserNotFoundException;
 import com.br.itau.login.model.SessionDTO;
 import com.br.itau.login.model.entity.UserAccount;
 import com.br.itau.login.model.request.LoginRequest;
@@ -32,29 +33,28 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public ResponseEntity<AuthResponse> login(LoginRequest loginRequest) {
+	public AuthResponse login(LoginRequest loginRequest) {
 
 		Authentication auth = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
-		UserAccount userAccount = userRepositoryPort.findByUsername(loginRequest.getUsername()).orElse(null);
+		
+		UserAccount userAccount = userRepositoryPort.findByUsername(loginRequest.getUsername())
+			    .orElseThrow(() -> new UserNotFoundException("User not found"));
+		
 		String roleName = userAccount != null && userAccount.getRole() != null ? userAccount.getRole().name() : null;
 
 		String sessionId = geraneteSessionId();
 		
 		String symmetricKey = generateSymmetricKey();
 
-		if (Objects.nonNull(userAccount)) {
 			SessionDTO	session = new SessionDTO(sessionId, loginRequest.getUsername(), userAccount.getContractService(),
 					symmetricKey, roleName);
 			
 			saveSession(session);
 			String token = getSession(loginRequest, sessionId, roleName, userAccount);
 
-			return ResponseEntity.ok(new AuthResponse(token));
-		}else {
-			throw new RuntimeException("User not found");
-		}
+			return new AuthResponse(token);
 
 	}
 
