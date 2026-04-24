@@ -1,0 +1,33 @@
+# Example .env for LoginService
+# Copy this file to .env and adjust values for your environment before running.
+
+# Redis (used by the application when running with docker-compose or a local Redis)
+SPRING_REDIS_HOST=localhost
+SPRING_REDIS_PORT=6379
+
+# Datasource (H2 in-memory by default). For a file-based H2 or external DB, change the URL.
+SPRING_DATASOURCE_URL=jdbc:h2:mem:alunos_db;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+SPRING_DATASOURCE_USERNAME=sa
+SPRING_DATASOURCE_PASSWORD=
+
+# JWT settings
+JWT_SECRET=ChangeThisSecretKeyForDev_UseYourOwnInProd_AtLeast32Chars!
+JWT_EXPIRATION_MS=300000
+
+# Server settings
+SERVER_PORT=8081
+SERVER_SERVLET_CONTEXT_PATH=/api/v1
+
+# Logging
+LOGGING_FILE_NAME=logs/login-application.log
+
+# Notes:
+# - Copy this file to a file named .env in the project root (same directory as docker-compose.yml)
+#   and edit values you need to override for local runs.
+# - The Spring Boot relaxed binding maps environment variables to properties in application.yaml.
+#   Examples:
+#     jwt.secret <- JWT_SECRET
+#     spring.redis.host <- SPRING_REDIS_HOST
+#     server.port <- SERVER_PORT
+#     server.servlet.context-path <- SERVER_SERVLET_CONTEXT_PATH
+# - Do NOT use the example JWT_SECRET in production. Replace it with a long random secret.

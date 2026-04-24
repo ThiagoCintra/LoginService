@@ -13,14 +13,21 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.br.itau.login.security.JwtAuthenticationFilter;
+import com.br.itau.login.security.LoginRateLimitFilter;
+import com.br.itau.login.security.ContractAuthorizationFilter;
 
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
 	private final JwtAuthenticationFilter jwtAuthenticationFilter;
+	private final LoginRateLimitFilter loginRateLimitFilter;
+	private final ContractAuthorizationFilter contractAuthorizationFilter;
 
-	public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
+	public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, LoginRateLimitFilter loginRateLimitFilter,
+						  ContractAuthorizationFilter contractAuthorizationFilter) {
 		this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+		this.loginRateLimitFilter = loginRateLimitFilter;
+		this.contractAuthorizationFilter = contractAuthorizationFilter;
 	}
 
 	@Bean
@@ -38,9 +45,17 @@ public class SecurityConfig {
 		http.csrf(csrf -> csrf.disable())
 				.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(
-						auth -> auth.requestMatchers("/auth/login").permitAll().anyRequest().authenticated())
+						auth -> auth.requestMatchers("/auth/login")
+						.permitAll().anyRequest().authenticated())
+				
+				.exceptionHandling(ex -> ex.authenticationEntryPoint((request, response, authException) ->
+						response.sendError(401, "Unauthorized"))
+						.accessDeniedHandler((request, response, accessDeniedException) ->
+						response.sendError(403, "Forbidden")))
 
-				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+				.addFilterBefore(loginRateLimitFilter, UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+				.addFilterAfter(contractAuthorizationFilter, JwtAuthenticationFilter.class);
 		return http.build();
 	}
 }

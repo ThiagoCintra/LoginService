@@ -2,3 +2,4 @@
  # Local environment files
  .env
  .env.*
+/target/
