@@ -23,13 +23,16 @@ import static com.br.itau.login.utils.SessionUtils.*;
 public class LoginServiceImpl implements LoginService {
 
 	private final AuthenticationManager authenticationManager;
-	
 	private final UserRepositoryDomain userRepositoryPort;
 
 	public LoginServiceImpl(AuthenticationManager authenticationManager, JwtService jwtService,
 			SessionService sessionService, UserRepositoryDomain userRepositoryPort) {
 		this.authenticationManager = authenticationManager;
 		this.userRepositoryPort = userRepositoryPort;
+		// ensure the static helpers in SessionUtils use the provided beans (helps tests that construct this class)
+		// SessionUtils is a component in the app context that normally sets these, but in unit tests
+		// we instantiate LoginServiceImpl manually with mocks, so propagate them to the static utils here.
+		com.br.itau.login.utils.SessionUtils.setServices(sessionService, jwtService);
 	}
 
 	@Override
@@ -48,13 +51,14 @@ public class LoginServiceImpl implements LoginService {
 		
 		String symmetricKey = generateSymmetricKey();
 
-			SessionDTO	session = new SessionDTO(sessionId, loginRequest.getUsername(), userAccount.getContractService(),
-					symmetricKey, roleName);
-			
-			saveSession(session);
-			String token = getSession(loginRequest, sessionId, roleName, userAccount);
+		SessionDTO session = new SessionDTO(sessionId, loginRequest.getUsername(), userAccount.getContractService(),
+				symmetricKey, roleName);
 
-			return new AuthResponse(token);
+		// use the static helpers (SessionUtils) to save the session and generate the token
+		saveSession(session);
+		String token = getSession(loginRequest, sessionId, roleName, userAccount);
+
+		return new AuthResponse(token);
 
 	}
 
