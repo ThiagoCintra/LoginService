@@ -19,6 +19,20 @@ public class SessionUtils {
 		SessionUtils.jwtService = jwtService;
 	}
 
+	// Expose setters so tests or manual constructions can inject mocks into the static helpers
+	public static void setSessionService(SessionService sessionService) {
+		SessionUtils.sessionService = sessionService;
+	}
+
+	public static void setJwtService(JwtService jwtService) {
+		SessionUtils.jwtService = jwtService;
+	}
+
+	public static void setServices(SessionService sessionService, JwtService jwtService) {
+		SessionUtils.sessionService = sessionService;
+		SessionUtils.jwtService = jwtService;
+	}
+
 	public static String geraneteSessionId() {
 		return java.util.UUID.randomUUID().toString();
 	}
