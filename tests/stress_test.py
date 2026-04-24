@@ -9,15 +9,19 @@ import requests
 import threading
 import time
 import json
+import os
 import statistics
 from datetime import datetime
 from collections import defaultdict
 
-BASE_URL = "http://localhost:8081/api/v1"
+BASE_URL = os.environ.get("LOGIN_BASE_URL", "http://localhost:8081/api/v1")
 LOGIN_URL = f"{BASE_URL}/auth/login"
 ME_URL = f"{BASE_URL}/auth/me"
 
-CREDENTIALS = {"username": "Thiago", "password": "231299"}
+CREDENTIALS = {
+    "username": os.environ.get("TEST_USERNAME", "Thiago"),
+    "password": os.environ.get("TEST_PASSWORD", "231299"),
+}
 
 # ─────────────────────────────────────────────────────────
 # Coletor de métricas thread-safe

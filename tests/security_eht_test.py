@@ -8,11 +8,15 @@ import requests
 import json
 import time
 import base64
+import os
 from datetime import datetime
 
-BASE_URL = "http://localhost:8081/api/v1"
+BASE_URL = os.environ.get("LOGIN_BASE_URL", "http://localhost:8081/api/v1")
 LOGIN_URL = f"{BASE_URL}/auth/login"
 ME_URL = f"{BASE_URL}/auth/me"
+
+TEST_USERNAME = os.environ.get("TEST_USERNAME", "Thiago")
+TEST_PASSWORD = os.environ.get("TEST_PASSWORD", "231299")
 
 results = []
 
@@ -35,7 +39,7 @@ def log(category, test_name, result, details="", severity="INFO", passed=True):
 def valid_login():
     """Obtém um token válido para uso nos testes."""
     r = requests.post(
-        LOGIN_URL, json={"username": "Thiago", "password": "231299"}, timeout=5
+        LOGIN_URL, json={"username": TEST_USERNAME, "password": TEST_PASSWORD}, timeout=5
     )
     if r.status_code == 200:
         return r.json().get("token")
@@ -170,7 +174,7 @@ def test_injection():
     # SQL Injection na senha
     r = requests.post(
         LOGIN_URL,
-        json={"username": "Thiago", "password": "' OR '1'='1"},
+        json={"username": TEST_USERNAME, "password": "' OR '1'='1"},
         timeout=5,
     )
     passed = r.status_code in [400, 401, 403]
@@ -278,7 +282,7 @@ def test_brute_force():
     start = time.time()
     for senha in senhas:
         r = requests.post(
-            LOGIN_URL, json={"username": "Thiago", "password": senha}, timeout=5
+            LOGIN_URL, json={"username": TEST_USERNAME, "password": senha}, timeout=5
         )
         last_code = r.status_code
         if r.status_code == 429:
@@ -298,7 +302,7 @@ def test_brute_force():
     # Timing attack / enumeração
     t1_start = time.time()
     requests.post(
-        LOGIN_URL, json={"username": "Thiago", "password": "senhaerrada"}, timeout=5
+        LOGIN_URL, json={"username": TEST_USERNAME, "password": "senhaerrada"}, timeout=5
     )
     t1 = time.time() - t1_start
 
@@ -323,7 +327,7 @@ def test_brute_force():
 
     # Enumeração por código HTTP
     r_exist = requests.post(
-        LOGIN_URL, json={"username": "Thiago", "password": "errada"}, timeout=5
+        LOGIN_URL, json={"username": TEST_USERNAME, "password": "errada"}, timeout=5
     )
     r_noexist = requests.post(
         LOGIN_URL, json={"username": "naoexiste_xyz", "password": "errada"}, timeout=5
@@ -420,7 +424,7 @@ def test_sensitive_data():
 
     # Resposta de login
     r = requests.post(
-        LOGIN_URL, json={"username": "Thiago", "password": "231299"}, timeout=5
+        LOGIN_URL, json={"username": TEST_USERNAME, "password": TEST_PASSWORD}, timeout=5
     )
     if r.status_code == 200:
         body = r.json()

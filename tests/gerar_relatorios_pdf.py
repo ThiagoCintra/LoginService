@@ -5,6 +5,7 @@ Gera relatório de segurança (EHT) e de stress em português.
 """
 
 import json
+import os
 import unicodedata
 from fpdf import FPDF
 from datetime import datetime
@@ -605,12 +606,26 @@ def gerar_relatorio_stress(data_path, output_path):
 # EXECUÇÃO
 # ─────────────────────────────────────────────────────────
 if __name__ == "__main__":
+    import argparse
+
+    # Determine project root relative to this script's location
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(script_dir)
+    relatorios_dir = os.path.join(project_root, "relatorios")
+    os.makedirs(relatorios_dir, exist_ok=True)
+
+    parser = argparse.ArgumentParser(description="Gera relatorios PDF do LoginService")
+    parser.add_argument("--eht-input", default="/tmp/eht_results.json")
+    parser.add_argument("--stress-input", default="/tmp/stress_results.json")
+    parser.add_argument("--output-dir", default=relatorios_dir)
+    args = parser.parse_args()
+
     gerar_relatorio_eht(
-        "/tmp/eht_results.json",
-        "/home/runner/work/LoginService/LoginService/relatorios/relatorio_seguranca_eht.pdf",
+        args.eht_input,
+        os.path.join(args.output_dir, "relatorio_seguranca_eht.pdf"),
     )
     gerar_relatorio_stress(
-        "/tmp/stress_results.json",
-        "/home/runner/work/LoginService/LoginService/relatorios/relatorio_stress.pdf",
+        args.stress_input,
+        os.path.join(args.output_dir, "relatorio_stress.pdf"),
     )
     print("\nAmbos os relatorios gerados com sucesso!")
