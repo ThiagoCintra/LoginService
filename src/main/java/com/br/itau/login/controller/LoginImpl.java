@@ -1,18 +1,15 @@
 package com.br.itau.login.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.br.itau.login.model.SessionDTO;
 import com.br.itau.login.model.request.LoginRequest;
 import com.br.itau.login.model.response.AuthResponse;
+import com.br.itau.login.model.response.MeResponseDTO;
 import com.br.itau.login.service.LoginService;
 
 import jakarta.validation.Valid;
@@ -21,7 +18,6 @@ import jakarta.validation.Valid;
 public class LoginImpl implements Login {
 
 	private final LoginService loginService;
-	private final Logger logger = LoggerFactory.getLogger(LoginImpl.class);
 
 	public LoginImpl(LoginService loginService) {
 		this.loginService = loginService;
@@ -33,11 +29,13 @@ public class LoginImpl implements Login {
 	}
 
 	@Override
-	public ResponseEntity<SessionDTO> me(@AuthenticationPrincipal SessionDTO session) {
+	public ResponseEntity<MeResponseDTO> me(@AuthenticationPrincipal SessionDTO session) {
 		if (session == null) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
-		return ResponseEntity.ok(session);
+		MeResponseDTO dto = new MeResponseDTO(session.getSessionId(), session.getUsername(),
+				session.getContractService(), session.getRole());
+		return ResponseEntity.ok(dto);
 	}
 
 }

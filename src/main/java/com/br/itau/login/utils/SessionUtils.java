@@ -11,44 +11,29 @@ import com.br.itau.login.service.SessionService;
 @Component
 public class SessionUtils {
 
-	private static SessionService sessionService;
-	private static JwtService jwtService;
+	private final SessionService sessionService;
+	private final JwtService jwtService;
 
 	public SessionUtils(SessionService sessionService, JwtService jwtService) {
-		SessionUtils.sessionService = sessionService;
-		SessionUtils.jwtService = jwtService;
+		this.sessionService = sessionService;
+		this.jwtService = jwtService;
 	}
 
-	// Expose setters so tests or manual constructions can inject mocks into the static helpers
-	public static void setSessionService(SessionService sessionService) {
-		SessionUtils.sessionService = sessionService;
-	}
-
-	public static void setJwtService(JwtService jwtService) {
-		SessionUtils.jwtService = jwtService;
-	}
-
-	public static void setServices(SessionService sessionService, JwtService jwtService) {
-		SessionUtils.sessionService = sessionService;
-		SessionUtils.jwtService = jwtService;
-	}
-
-	public static String geraneteSessionId() {
+	public String generateSessionId() {
 		return java.util.UUID.randomUUID().toString();
 	}
 
-	public static String generateSymmetricKey() {
+	public String generateSymmetricKey() {
 		byte[] keyBytes = new byte[32];
 		new java.security.SecureRandom().nextBytes(keyBytes);
 		return java.util.Base64.getEncoder().encodeToString(keyBytes);
 	}
 
-	public static void saveSession(SessionDTO session) {
+	public void saveSession(SessionDTO session) {
 		sessionService.save(session, jwtService.getExpirationMs());
 	}
 
-	public static String getSession(LoginRequest loginRequest, String sessionId, String roleName,
-			UserAccount userAccount) {
+	public String createToken(LoginRequest loginRequest, String sessionId, String roleName, UserAccount userAccount) {
 		return jwtService.generateToken(loginRequest.getUsername(), sessionId, roleName,
 				userAccount.getContractService());
 	}

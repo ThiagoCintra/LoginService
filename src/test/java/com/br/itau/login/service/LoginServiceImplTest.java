@@ -37,7 +37,8 @@ class LoginServiceImplTest {
 		jwtService = mock(JwtService.class);
 		sessionService = mock(SessionService.class);
 		userRepositoryPort = mock(UserRepositoryDomain.class);
-		loginService = new LoginServiceImpl(authenticationManager, jwtService, sessionService, userRepositoryPort);
+		com.br.itau.login.utils.SessionUtils sessionUtils = new com.br.itau.login.utils.SessionUtils(sessionService, jwtService);
+		loginService = new LoginServiceImpl(authenticationManager, sessionUtils, userRepositoryPort);
 	}
 
 	@Test
