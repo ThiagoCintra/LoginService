@@ -146,6 +146,14 @@
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.1.4</version>
+				<configuration>
+					<mainClass>com.br.itau.login.LoginApplication</mainClass>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>

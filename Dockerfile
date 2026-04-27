@@ -21,13 +21,36 @@ RUN mvn clean package -DskipTests -B
 
 FROM eclipse-temurin:25-jre-jammy
 WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends curl netcat-openbsd && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
+## Create wait-for script used to wait for dependent services (defined via WAIT_HOSTS)
+RUN cat > /wait-for.sh << 'EOF'
+#!/bin/sh
+set -e
+if [ -n "${WAIT_HOSTS:-}" ]; then
+  IFS=','; for h in $WAIT_HOSTS; do
+	host=$(echo "$h" | cut -d: -f1)
+	port=$(echo "$h" | cut -d: -f2)
+	echo "Waiting for $host:$port..."
+	retries=30
+	count=0
+	until nc -z "$host" "$port"; do
+	  count=$((count+1))
+	  if [ "$count" -ge "$retries" ]; then
+		echo "Timeout waiting for $host:$port" >&2; exit 1
+	  fi
+	  sleep 2
+	done
+  done
+fi
+exec "$@"
+EOF
+RUN chmod +x /wait-for.sh
 
 ## Copy the repackaged Spring Boot jar
-COPY --from=build /app/target/*-SNAPSHOT.jar app.jar
+COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8081
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["/bin/sh", "-c", "/wait-for.sh && exec java -jar /app/app.jar"]
 # NOTE: stray shell commands were removed. If you intended to build the TransactionService
 # image, run that from a terminal in the TransactionService directory, not inside this Dockerfile.
