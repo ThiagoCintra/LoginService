@@ -1,0 +1,90 @@
+@startuml
+' LoginService class diagram
+skinparam classAttributeIconSize 0
+
+package "com.br.itau.login" {
+  class LoginApplication <<(A,#EFEFEF)>>
+}
+
+package controller {
+  interface Login {
+    +login(loginRequest): ResponseEntity<AuthResponse>
+    +me(session): ResponseEntity<MeResponseDTO>
+  }
+  class LoginImpl {
+    -loginService: LoginService
+    +login(...)
+    +me(...)
+  }
+}
+
+package service {
+  interface LoginService
+  class LoginServiceImpl {
+    -authenticationManager
+    -sessionUtils
+    -userRepositoryPort
+    +login(LoginRequest): AuthResponse
+  }
+
+  interface JwtService
+  class JwtServiceImpl {
+    -key
+    -expirationMs
+    +generateToken(...): String
+    +isTokenValid(token): boolean
+    +getClaims(token): Claims
+  }
+
+  class SessionServiceImpl {
+    -redisTemplate
+    +find(sessionId): SessionDTO
+    +save(session, ttlMillis)
+    +delete(sessionId)
+  }
+}
+
+package adapters {
+  class UserRepositoryAdapter {
+    -userAccountRepository
+    +findByUsername(username): Optional<UserAccount>
+    +findById(id): Optional<UserAccount>
+    +save(user): UserAccount
+  }
+}
+
+package repository {
+  interface UserAccountRepository
+}
+
+package model {
+  class SessionDTO {
+    +sessionId
+    +username
+    +contractService
+    +symmetricKey
+    +role
+  }
+  class UserAccount {
+    +id
+    +username
+    +password
+    +nomeCompleto
+    +email
+    +contractService
+    +role
+  }
+}
+
+' relationships
+LoginImpl ..|> Login
+LoginImpl --> LoginServiceImpl : uses
+LoginServiceImpl ..|> LoginService
+LoginServiceImpl --> UserRepositoryAdapter : reads/writes
+LoginServiceImpl --> SessionServiceImpl : save/find
+LoginServiceImpl --> JwtServiceImpl : create token
+UserRepositoryAdapter ..|> UserAccountRepository
+SessionServiceImpl --> "Redis (external)" : opsForValue()
+UserAccountRepository --> UserAccount
+
+@enduml

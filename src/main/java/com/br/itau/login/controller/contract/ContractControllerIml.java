@@ -20,7 +20,6 @@ public class ContractControllerIml implements ContractController {
 	@Override
 	public ResponseEntity contract(@AuthenticationPrincipal SessionDTO session) {
 		if (session == null) {
-			// per requirement: if session is null return 500
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 		return ResponseEntity.ok().build();

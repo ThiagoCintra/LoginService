@@ -1,0 +1,29 @@
+@startuml
+actor Client
+participant TransactionService
+participant LoginService
+participant SQS
+participant GameService
+
+Client -> TransactionService: POST /transactions (TransactionRequest)
+activate TransactionService
+TransactionService -> LoginService: GET /me (Authorization: Bearer <token>)
+activate LoginService
+LoginService --> TransactionService: SessionDTO (username, sessionId, contractService...)
+deactivate LoginService
+
+TransactionService -> SQS: publish(TransactionEvent)
+activate SQS
+SQS --> TransactionService: 200 OK (async)
+deactivate SQS
+
+note over GameService,SQS: GameService will consume TransactionEvent from SQS
+GameService -> SQS: poll/consume TransactionEvent
+activate GameService
+SQS --> GameService: TransactionEvent
+GameService --> GameService: apply business rules (missions, levels, deduplication)
+deactivate GameService
+
+TransactionService --> Client: 202 ACCEPTED (TransactionResponse)
+deactivate TransactionService
+@enduml

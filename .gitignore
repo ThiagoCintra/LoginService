@@ -1,6 +1,1 @@
- /target/
- # Local environment files
- .env
- .env.*
 /target/
-/docs/*

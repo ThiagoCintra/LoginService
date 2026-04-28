@@ -1,0 +1,103 @@
+@startuml
+' TransactionService class diagram
+skinparam classAttributeIconSize 0
+
+package controller {
+  class TransactionController {
+    -transactionService: TransactionService
+    +createTransaction(TransactionRequest): ResponseEntity<TransactionResponse>
+  }
+}
+
+package service {
+  class TransactionService {
+    -loginClient: LoginClient
+    -sqsProducer: SqsProducer
+    -validator: TransactionValidator
+    -transactionCounter
+    -transactionFailureCounter
+    -loginServiceTimer
+    +processTransaction(request): TransactionResponse
+  }
+}
+
+package infrastructure.client {
+  class LoginClient {
+    -webClient
+    -timeoutMillis
+    -failFast
+    +getSession(token): SessionDTO
+    +getSessionFallback(token, throwable): SessionDTO
+  }
+}
+
+package infrastructure.sqs {
+  class SqsProducer {
+    -sqsClient
+    -objectMapper
+    -queueUrl
+    +publish(event)
+  }
+}
+
+package dto {
+  class TransactionRequest {
+    +type
+    +amount
+  }
+  class TransactionResponse {
+    +transactionId
+    +customerId
+    +type
+    +amount
+    +status
+    +timestamp
+  }
+  class TransactionEvent {
+    +customerId
+    +type
+    +amount
+    +timestamp
+  }
+  class SessionDTO {
+    +sessionId
+    +username
+    +contractService
+    +symmetricKey
+    +role
+  }
+}
+
+package infrastructure.security {
+  class JwtDetails {
+    +channel
+    +rawToken
+  }
+}
+
+' relationships
+TransactionController --> TransactionService
+TransactionService --> LoginClient : fetch session
+TransactionService --> SqsProducer : publish
+LoginClient --> "LoginService (/me)" : HTTP GET
+SqsProducer --> "AWS SQS" : sendMessage
+TransactionService ..> TransactionRequest
+TransactionService ..> TransactionResponse
+TransactionService ..> TransactionEvent
+TransactionService ..> JwtDetails
+
+package gamification {
+  class GameService {
+    -dedupStore
+    -progressStore
+    +consume(event: TransactionEvent)
+    +evaluateMissions(event)
+    +redeemBenefit(customerId, benefitId)
+  }
+}
+
+' SQS delivers events to GameService
+"AWS SQS" --> GameService : deliver TransactionEvent
+GameService ..> TransactionEvent
+
+@enduml

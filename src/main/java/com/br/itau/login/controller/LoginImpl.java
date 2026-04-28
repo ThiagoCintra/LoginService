@@ -11,6 +11,7 @@ import com.br.itau.login.model.request.LoginRequest;
 import com.br.itau.login.model.response.AuthResponse;
 import com.br.itau.login.model.response.MeResponseDTO;
 import com.br.itau.login.service.LoginService;
+import com.br.itau.login.service.MeService;
 
 import jakarta.validation.Valid;
 
@@ -18,9 +19,13 @@ import jakarta.validation.Valid;
 public class LoginImpl implements Login {
 
 	private final LoginService loginService;
+	private final MeService meService;
+	
+	
 
-	public LoginImpl(LoginService loginService) {
+	public LoginImpl(LoginService loginService,MeService meService) {
 		this.loginService = loginService;
+		this.meService = meService;
 	}
 
 	@Override
@@ -33,9 +38,11 @@ public class LoginImpl implements Login {
 		if (session == null) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
-		MeResponseDTO dto = new MeResponseDTO(session.getSessionId(), session.getUsername(),
-				session.getContractService(), session.getRole());
-		return ResponseEntity.ok(dto);
+		 MeResponseDTO dto = meService.getUserInfo(session.getSessionId(), session.getSessionId(), session.getUsername());
+		 dto.setChannel("MOBILE");
+		 return ResponseEntity.ok(dto);
+		
+		
 	}
 
 }
