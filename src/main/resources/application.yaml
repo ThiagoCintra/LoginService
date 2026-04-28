@@ -63,8 +63,8 @@ jwt:
   expiration-ms: 300000 #5 minutos
 
 rate-limit:
-  max-requests: 5      # máximo de tentativas de login por janela
-  window-seconds: 60   # tamanho da janela em segundos
+  max-requests: 100      # máximo de tentativas de login por janela
+  window-seconds: 10   # tamanho da janela em segundos
 
 threads:
   virtual:

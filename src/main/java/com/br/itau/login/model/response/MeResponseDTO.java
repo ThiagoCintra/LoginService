@@ -12,4 +12,7 @@ public class MeResponseDTO {
     private String username;
     private Boolean contractService;
     private String role;
+    private Long id;
+    private String channel;
+    
 }

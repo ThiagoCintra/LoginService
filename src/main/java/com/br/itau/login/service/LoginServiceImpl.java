@@ -46,6 +46,7 @@ public class LoginServiceImpl implements LoginService {
 		String sessionId = sessionUtils.generateSessionId();
 
 		String symmetricKey = sessionUtils.generateSymmetricKey();
+		
 
 		SessionDTO session = new SessionDTO(sessionId, loginRequest.getUsername(), userAccount.getContractService(),
 				symmetricKey, roleName);

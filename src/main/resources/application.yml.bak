@@ -51,8 +51,8 @@ jwt:
   expiration-ms: ${JWT_EXPIRATION:86400000}
 
 rate-limit:
-  max-requests: 5
-  window-seconds: 60
+  max-requests: 100
+  window-seconds: 1
 
 threads:
   virtual:
