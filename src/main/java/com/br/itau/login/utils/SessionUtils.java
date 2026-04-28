@@ -33,8 +33,8 @@ public class SessionUtils {
 		sessionService.save(session, jwtService.getExpirationMs());
 	}
 
-	public String createToken(LoginRequest loginRequest, String sessionId, String roleName, UserAccount userAccount) {
+	public String createToken(LoginRequest loginRequest, String sessionId, String roleName, UserAccount userAccount, String channel) {
 		return jwtService.generateToken(loginRequest.getUsername(), sessionId, roleName,
-				userAccount.getContractService());
+				userAccount.getContractService(), channel);
 	}
 }

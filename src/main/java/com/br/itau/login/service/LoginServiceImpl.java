@@ -33,7 +33,7 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
-	public AuthResponse login(LoginRequest loginRequest) {
+	public AuthResponse login(LoginRequest loginRequest, String channel) {
 
 		Authentication auth = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -49,10 +49,10 @@ public class LoginServiceImpl implements LoginService {
 		
 
 		SessionDTO session = new SessionDTO(sessionId, loginRequest.getUsername(), userAccount.getContractService(),
-				symmetricKey, roleName);
+				symmetricKey, roleName, channel);
 
 		sessionUtils.saveSession(session);
-		String token = sessionUtils.createToken(loginRequest, sessionId, roleName, userAccount);
+		String token = sessionUtils.createToken(loginRequest, sessionId, roleName, userAccount, channel);
 
 		return new AuthResponse(token);
 

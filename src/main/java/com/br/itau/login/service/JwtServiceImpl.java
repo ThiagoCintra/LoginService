@@ -23,7 +23,7 @@ public class JwtServiceImpl implements JwtService {
 	}
 
 	@Override
-	public String generateToken(String username, String sessionId, String role, Boolean contractService) {
+	public String generateToken(String username, String sessionId, String role, Boolean contractService, String channel) {
 	    Date now = new Date();
 	    Date exp = new Date(now.getTime() + expirationMs);
 	    return Jwts.builder()
@@ -32,8 +32,8 @@ public class JwtServiceImpl implements JwtService {
 	            .setExpiration(exp)
 	            .claim("sessionId", sessionId)
 	            .claim("role", role)
-	            .claim("contractService", contractService)
-	            .claim("channel", "MOBILE") 
+							.claim("contractService", contractService)
+							.claim("channel", channel)
 	            .signWith(key, SignatureAlgorithm.HS256)
 	            .compact();
 	}

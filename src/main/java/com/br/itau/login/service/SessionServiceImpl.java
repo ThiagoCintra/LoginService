@@ -2,6 +2,7 @@ package com.br.itau.login.service;
 
 import java.time.Duration;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -42,7 +43,8 @@ public class SessionServiceImpl implements SessionService {
 			}
 			String symmetricKey = map.get("symmetricKey") != null ? map.get("symmetricKey").toString() : null;
 			String role = map.get("role") != null ? map.get("role").toString() : null;
-			return new SessionDTO(sid, username, contractService, symmetricKey, role);
+			String channel = map.get("channel") != null ? map.get("channel").toString() : null;
+			return new SessionDTO(sid, username, contractService, symmetricKey, role, channel);
 		}
 		return null;
 	}
@@ -66,5 +68,18 @@ public class SessionServiceImpl implements SessionService {
 			}
 			ops.set(key(session.getSessionId()), session, Duration.ofMillis(ttlMillis));
 		}
+
+					@Override
+					public long getTtlMillis(String sessionId) {
+						try {
+							Long expire = redisTemplate.getExpire(key(sessionId), TimeUnit.MILLISECONDS);
+							if (expire == null) {
+								return -1L;
+							}
+							return expire;
+						} catch (Exception e) {
+							return -1L;
+						}
+					}
 
 }

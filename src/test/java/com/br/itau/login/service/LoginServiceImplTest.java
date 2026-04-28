@@ -56,9 +56,9 @@ class LoginServiceImplTest {
 		when(userRepositoryPort.findByUsername("Thiago")).thenReturn(Optional.of(account));
 
 		when(jwtService.getExpirationMs()).thenReturn(60_000L);
-		when(jwtService.generateToken(any(), any(), any(), any())).thenReturn("jwt-token");
+		when(jwtService.generateToken(any(), any(), any(), any(), any())).thenReturn("jwt-token");
 
-		AuthResponse response = loginService.login(request);
+		AuthResponse response = loginService.login(request, "WEB");
 		
 		ResponseEntity<AuthResponse> responseEntity = ResponseEntity.ok(response);
 
@@ -77,7 +77,7 @@ class LoginServiceImplTest {
 		when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class))).thenReturn(auth);
 		when(userRepositoryPort.findByUsername("unknown")).thenReturn(Optional.empty());
 
-		assertThatThrownBy(() -> loginService.login(request))
+		assertThatThrownBy(() -> loginService.login(request, "WEB"))
 				.isInstanceOf(RuntimeException.class)
 				.hasMessageContaining("User not found");
 	}
@@ -89,7 +89,7 @@ class LoginServiceImplTest {
 		when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
 				.thenThrow(new BadCredentialsException("Bad credentials"));
 
-		assertThatThrownBy(() -> loginService.login(request))
+		assertThatThrownBy(() -> loginService.login(request, "WEB"))
 				.isInstanceOf(BadCredentialsException.class);
 	}
 
@@ -108,9 +108,9 @@ class LoginServiceImplTest {
 		when(userRepositoryPort.findByUsername("Thiago")).thenReturn(Optional.of(account));
 
 		when(jwtService.getExpirationMs()).thenReturn(60_000L);
-		when(jwtService.generateToken(any(), any(), any(), any())).thenReturn("jwt-token-no-role");
+		when(jwtService.generateToken(any(), any(), any(), any(), any())).thenReturn("jwt-token-no-role");
 
-		AuthResponse response = loginService.login(request);
+		AuthResponse response = loginService.login(request, "WEB");
 		
 		ResponseEntity<AuthResponse> responseEntity = ResponseEntity.ok(response);
 

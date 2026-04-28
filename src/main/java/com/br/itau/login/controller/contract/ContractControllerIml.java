@@ -6,15 +6,15 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.itau.login.model.SessionDTO;
-import com.br.itau.login.service.SessionService;
+import com.br.itau.login.service.ContractService;
 
 @RestController
 public class ContractControllerIml implements ContractController {
 
-	private final SessionService sessionService;
+	private final ContractService contractService;
 
-	public ContractControllerIml(SessionService sessionService) {
-		this.sessionService = sessionService;
+	public ContractControllerIml(ContractService contractService) {
+		this.contractService = contractService;
 	}
 
 	@Override
@@ -22,6 +22,7 @@ public class ContractControllerIml implements ContractController {
 		if (session == null) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
+		contractService.contract(session);
 		return ResponseEntity.ok().build();
 	}
 

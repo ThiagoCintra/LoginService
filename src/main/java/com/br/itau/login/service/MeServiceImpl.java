@@ -6,6 +6,7 @@ import com.br.itau.login.domains.UserRepositoryDomain;
 import com.br.itau.login.model.SessionDTO;
 import com.br.itau.login.model.entity.UserAccount;
 import com.br.itau.login.model.response.MeResponseDTO;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import io.jsonwebtoken.Claims;
 
@@ -19,13 +20,16 @@ public class MeServiceImpl implements MeService {
     private final UserRepositoryDomain userRepositoryPort;
     private final JwtService jwtService;
     private final SessionService sessionService;
+    private final UserDetailsService userDetailsService;
 
-    public MeServiceImpl(UserRepositoryDomain userRepositoryPort, 
-                         JwtService jwtService, 
-                         SessionService sessionService) {
+    public MeServiceImpl(UserRepositoryDomain userRepositoryPort,
+                         JwtService jwtService,
+                         SessionService sessionService,
+                         UserDetailsService userDetailsService) {
         this.userRepositoryPort = userRepositoryPort;
         this.jwtService = jwtService;
         this.sessionService = sessionService;
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
@@ -39,15 +43,18 @@ public class MeServiceImpl implements MeService {
             throw new RuntimeException("Session not found");
         }
 
-        // 2. Buscar usuário no banco
+        // 2. Reuse existing UserDetailsService to validate/load user
+        userDetailsService.loadUserByUsername(username);
+
+        // 3. Buscar usuário no banco (para fields like id)
         UserAccount user = userRepositoryPort.findByUsername(username)
                 .orElseThrow(() -> {
                     logger.error("User not found: {}", username);
                     return new RuntimeException("User not found: " + username);
                 });
 
-        // 3. Extrair channel do token
-        String channel = extractChannelFromToken(token);
+        // 4. Channel comes from session (no hard-code)
+        String channel = session.getChannel();
 
         // 4. Construir resposta
         MeResponseDTO response = new MeResponseDTO();
@@ -62,20 +69,5 @@ public class MeServiceImpl implements MeService {
         return response;
     }
 
-    private String extractChannelFromToken(String token) {
-        if (token == null || token.isEmpty()) {
-            logger.debug("No token provided for channel extraction");
-            return null;
-        }
-
-        try {
-            Claims claims = jwtService.getClaims(token);
-            String channel = claims.get("channel", String.class);
-            logger.debug("Channel extracted from token: {}", channel);
-            return channel;
-        } catch (Exception e) {
-            logger.warn("Failed to extract channel from token: {}", e.getMessage());
-            return null;
-        }
-    }
+    // channel is read from session in Redis; no token extraction here
 }

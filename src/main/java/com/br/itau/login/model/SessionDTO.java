@@ -13,4 +13,5 @@ public class SessionDTO {
 	private Boolean contractService;
 	private String symmetricKey;
 	private String role;
+	private String channel;
 }

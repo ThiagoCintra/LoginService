@@ -21,26 +21,26 @@ class JwtServiceImplTest {
 
 	@Test
 	void generateToken_shouldReturnNonNullToken() {
-		String token = jwtService.generateToken("user1", "session-1", "USER", Boolean.FALSE);
+		String token = jwtService.generateToken("user1", "session-1", "USER", Boolean.FALSE, "WEB");
 		assertThat(token).isNotBlank();
 	}
 
 	@Test
 	void isTokenValid_shouldReturnTrueForValidToken() {
-		String token = jwtService.generateToken("user1", "session-1", "USER", Boolean.TRUE);
+		String token = jwtService.generateToken("user1", "session-1", "USER", Boolean.TRUE, "WEB");
 		assertThat(jwtService.isTokenValid(token)).isTrue();
 	}
 
 	@Test
 	void isTokenValid_shouldReturnFalseForTamperedToken() {
-		String token = jwtService.generateToken("user1", "session-1", "USER", Boolean.FALSE);
+		String token = jwtService.generateToken("user1", "session-1", "USER", Boolean.FALSE, "WEB");
 		String tampered = token.substring(0, token.length() - 4) + "XXXX";
 		assertThat(jwtService.isTokenValid(tampered)).isFalse();
 	}
 
 	@Test
 	void getClaims_shouldContainExpectedClaims() {
-		String token = jwtService.generateToken("user1", "session-42", "ADMIN", Boolean.TRUE);
+		String token = jwtService.generateToken("user1", "session-42", "ADMIN", Boolean.TRUE, "WEB");
 		Claims claims = jwtService.getClaims(token);
 
 		assertThat(claims.getSubject()).isEqualTo("user1");
