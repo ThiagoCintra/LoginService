@@ -1,6 +1,90 @@
+# 🚀 Itau Microservices Platform
+
+<a href="https://openjdk.org/"><img src="https://img.shields.io/badge/Java-25-orange.svg"></a>
+<a href="https://spring.io/projects/spring-boot"><img src="https://img.shields.io/badge/Spring%20Boot-4.0.5-brightgreen.svg"></a>
+<a href="https://www.docker.com/"><img src="https://img.shields.io/badge/Docker-24.0-blue.svg"></a>
+
+## 📋 Visão Geral do Projeto
+
+**Nome:** Itau Microservices Platform  
+**Propósito:** Plataforma de processamento de transações gamificadas, onde usuários realizam operações financeiras que são consumidas por um sistema de jogos.
+
+**Problema que resolve:**
+- Processamento seguro de transações financeiras
+- Autenticação centralizada via JWT
+- Processamento assíncrono via SQS
+- Gamificação para engajamento do usuário
+
+**Principais Funcionalidades:**
+- ✅ Autenticação e autorização com JWT
+- ✅ CRUD de transações financeiras
+- ✅ Processamento assíncrono via filas SQS
+- ✅ Sistema de gamificação (níveis, missões)
+- ✅ Rate limiting por IP
+- ✅ Circuit breaker para resiliência
+
+**Tecnologias:**
+- Java 25, Spring Boot 4.0.5, Spring Security, Spring Data JPA
+- Redis (sessões, rate limiting), MongoDB (gamificação), H2 (testes)
+- AWS SQS (LocalStack), Docker, Maven, JWT, Resilience4j
+
+---
+
+## 🏗️ Arquitetura do Sistema
+
+### Diagrama de Arquitetura
+
+```mermaid
+flowchart TB
+    Client[Cliente/Postman]
+
+    subgraph Docker_Network[Rede Docker]
+        subgraph Login_Service[Login Service :8081]
+            LS[login-service\nAuth JWT]
+        end
+
+        subgraph Transaction_Service[Transaction Service :8080]
+            TS[transaction-service\nProcessa Transações]
+        end
+
+        subgraph Game_Service[Game Service :8082]
+            GS[game-service\nGamificação]
+        end
+
+        subgraph Infra[Infraestrutura]
+            RD[Redis :6379\nCache/Sessões]
+            MDB[(MongoDB :27017\nGame Data)]
+            LCL[LocalStack :4566\nSQS Queue]
+        end
+    end
+
+    Client --> LS
+    Client --> TS
+    TS --> LS
+    LS --> RD
+    TS --> RD
+    TS --> LCL
+    GS --> LCL
+    GS --> MDB
+
+    style LS fill:#4CAF50,stroke:#333,stroke-width:2px
+    style TS fill:#2196F3,stroke:#333,stroke-width:2px
+    style GS fill:#FF9800,stroke:#333,stroke-width:2px
+```
+
+### Serviços
+
+| Serviço | Porta | Responsabilidade |
+|---|---|---|
+| **login-service** | 8081 | Autenticação JWT, gerenciamento de sessões |
+| **transaction-service** | 8080 | Processamento de transações financeiras, publicação SQS |
+| **game-service** | 8082 | Gamificação, consumo de eventos SQS |
+
+---
+
 # LoginService
 
-Serviço de autenticação baseado em **Spring Boot 4 + Java 21**, utilizando **JWT** para autenticação stateless e **Redis** como store de sessões.
+Serviço de autenticação baseado em **Spring Boot 4.0.5 + Java 25**, utilizando **JWT** para autenticação stateless e **Redis** como store de sessões.
 
 ---
 
@@ -372,13 +456,13 @@ Os scripts estão na pasta [`tests/`](tests/):
 
 | Tecnologia | Versão | Uso |
 |---|---|---|
-| Java | 21 | Linguagem principal (com Virtual Threads) |
+| Java | 25 | Linguagem principal (com Virtual Threads) |
 | Spring Boot | 4.0.5 | Framework principal |
 | Spring Security | 6+ | Autenticação e autorização |
 | JWT (jjwt) | 0.11.5 | Tokens de autenticação stateless |
-| Redis | 7+ | Store de sessões e rate limiting distribuído |
+| Redis | 8+ | Store de sessões e rate limiting distribuído |
 | H2 | — | Banco em memória (DEV) |
 | PostgreSQL | — | Banco relacional (produção) |
-| MapStruct | 1.5.5 | Mapeamento de DTOs |
-| Lombok | 1.18.32 | Redução de boilerplate |
+| MapStruct | 1.6.3 | Mapeamento de DTOs |
+| Lombok | 1.18.46 | Redução de boilerplate |
 | Docker | 20+ | Containerização do Redis |
