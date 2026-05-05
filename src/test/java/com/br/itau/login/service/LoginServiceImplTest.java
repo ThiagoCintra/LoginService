@@ -38,7 +38,7 @@ class LoginServiceImplTest {
 		sessionService = mock(SessionService.class);
 		userRepositoryPort = mock(UserRepositoryDomain.class);
 		com.br.itau.login.utils.SessionUtils sessionUtils = new com.br.itau.login.utils.SessionUtils(sessionService, jwtService);
-		loginService = new LoginServiceImpl(authenticationManager, sessionUtils, userRepositoryPort);
+		loginService = new LoginServiceImpl(authenticationManager, sessionUtils, userRepositoryPort, sessionService);
 	}
 
 	@Test
@@ -56,7 +56,8 @@ class LoginServiceImplTest {
 		when(userRepositoryPort.findByUsername("Thiago")).thenReturn(Optional.of(account));
 
 		when(jwtService.getExpirationMs()).thenReturn(60_000L);
-		when(jwtService.generateToken(any(), any(), any(), any())).thenReturn("jwt-token");
+		when(jwtService.getRefreshExpirationMs()).thenReturn(604_800_000L);
+		when(jwtService.generateToken(any(), any(), any(), any(), any())).thenReturn("jwt-token");
 
 		AuthResponse response = loginService.login(request);
 		
@@ -108,7 +109,8 @@ class LoginServiceImplTest {
 		when(userRepositoryPort.findByUsername("Thiago")).thenReturn(Optional.of(account));
 
 		when(jwtService.getExpirationMs()).thenReturn(60_000L);
-		when(jwtService.generateToken(any(), any(), any(), any())).thenReturn("jwt-token-no-role");
+		when(jwtService.getRefreshExpirationMs()).thenReturn(604_800_000L);
+		when(jwtService.generateToken(any(), any(), any(), any(), any())).thenReturn("jwt-token-no-role");
 
 		AuthResponse response = loginService.login(request);
 		

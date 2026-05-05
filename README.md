@@ -29,7 +29,8 @@ Microserviço de autenticação e gestão de sessões baseado em **Spring Boot 3
 - [10. Como Executar](#10-como-executar)
 - [11. Variáveis de Ambiente](#11-variáveis-de-ambiente)
 - [12. Estrutura de Pastas](#12-estrutura-de-pastas)
-- [13. Pendências e Melhorias](#13-pendências-e-melhorias)
+- [13. Ajustes Implementados](#13-ajustes-implementados)
+- [14. Pendências e Melhorias](#14-pendências-e-melhorias)
 
 ---
 
@@ -40,10 +41,13 @@ Microserviço de autenticação e gestão de sessões baseado em **Spring Boot 3
 O **LoginService** é um microserviço de **autenticação e autorização** que:
 
 - Autentica usuários via `username` + `password` (senha armazenada em BCrypt)
-- Emite **tokens JWT (HS256)** com TTL configurável via `jwt.expiration-ms`
-- Armazena sessões autenticadas no **Redis** com TTL sincronizado ao token
-- Aplica **rate limiting distribuído** por IP no endpoint de login (padrão: 5 tentativas / 60 s)
-- Expõe `/auth/me` para consulta da sessão autenticada
+- Emite **tokens JWT (HS256)** com validade de **15 minutos** configurável via `jwt.expiration-ms`
+- Emite **refresh tokens** opacos (UUID) com validade de **7 dias**, armazenados no Redis
+- Armazena sessões autenticadas no **Redis** com TTL sincronizado ao access token
+- Aplica **controle de sessão única**: ao novo login, a sessão anterior do usuário é automaticamente invalidada
+- Inclui **`escola_id`** no payload do JWT e na sessão Redis
+- Aplica **rate limiting distribuído** por IP no endpoint de login
+- Expõe `/auth/me` para consulta da sessão autenticada (inclui `escola_id`)
 - Controla acesso ao `/contract` via flag `contractService` presente na sessão
 
 ---
@@ -101,15 +105,17 @@ O **LoginService** é um microserviço de **autenticação e autorização** que
 
 | Classe | Pacote | Responsabilidade |
 |---|---|---|
-| `LoginImpl` | `controller` | Recebe `POST /auth/login` e `GET /auth/me` |
+| `LoginImpl` | `controller` | Recebe `/auth/login`, `/auth/me`, `/auth/logout`, `/auth/refresh` |
 | `ContractControllerIml` | `controller.contract` | Recebe `POST /contract` |
-| `LoginServiceImpl` | `service` | Orquestra autenticação, sessão e emissão de JWT |
-| `JwtServiceImpl` | `service` | Gera e valida tokens JWT HS256 |
-| `SessionServiceImpl` | `service` | CRUD de sessões no Redis com TTL |
-| `MeServiceImpl` | `service` | Busca dados do usuário autenticado |
+| `LoginServiceImpl` | `service` | Orquestra autenticação, sessão única e emissão de JWT |
+| `JwtServiceImpl` | `service` | Gera e valida tokens JWT HS256 (access token) |
+| `SessionServiceImpl` | `service` | CRUD de sessões e refresh tokens no Redis com TTL |
+| `MeServiceImpl` | `service` | Busca dados do usuário autenticado (inclui `escola_id`) |
+| `LogoutServiceImpl` | `service` | Invalida sessão e refresh token no Redis, limpa SecurityContext |
+| `RefreshTokenServiceImpl` | `service` | Valida refresh token no Redis e emite novo access token |
 | `LoginRateLimiter` | `service` | Rate limiting distribuído via script Lua no Redis |
 | `UserDetailsServiceImpl` | `security` | Carrega usuário do banco para o Spring Security |
-| `JwtAuthenticationFilter` | `security` | Extrai JWT, valida, busca sessão e popula `SecurityContext` |
+| `JwtAuthenticationFilter` | `security` | Extrai JWT, valida, busca sessão e popula `SecurityContext`; retorna 401 "Sessão expirada ou substituída" quando sessão não existe |
 | `LoginRateLimitFilter` | `security` | Aplica rate limit no endpoint de login |
 | `ContractAuthorizationFilter` | `security` | Bloqueia `/contract` se `contractService=true` na sessão |
 | `AuthenticationFailureEventListener` | `security` | Registra em log as tentativas de login com falha |
@@ -124,7 +130,9 @@ O **LoginService** é um microserviço de **autenticação e autorização** que
 
 - **Ports & Adapters (Hexagonal)** — interface `UserRepositoryDomain` desacopla serviços da implementação JPA
 - **Filter Chain** — pipeline de segurança com filtros ordenados e responsabilidades separadas
-- **Stateful JWT** — token JWT + sessão espelhada no Redis (permite revogação)
+- **Stateful JWT** — token JWT + sessão espelhada no Redis (permite revogação imediata)
+- **Sessão Única por Usuário** — novo login invalida automaticamente sessão anterior
+- **Refresh Token Opaco** — UUID armazenado no Redis com TTL de 7 dias, sem rotação
 - **Fail-Open Rate Limiting** — se o Redis estiver indisponível, requisições passam (evita bloqueio de usuários legítimos)
 
 ---
@@ -133,8 +141,10 @@ O **LoginService** é um microserviço de **autenticação e autorização** que
 
 | Método | Caminho | Autenticação | Descrição |
 |---|---|---|---|
-| `POST` | `/auth/login` | ❌ Pública | Autentica usuário e retorna token JWT |
-| `GET` | `/auth/me` | ✅ Bearer JWT | Retorna dados da sessão autenticada |
+| `POST` | `/auth/login` | ❌ Pública | Autentica usuário, retorna access token + refresh token |
+| `GET` | `/auth/me` | ✅ Bearer JWT | Retorna dados da sessão autenticada (inclui `escola_id`) |
+| `POST` | `/auth/logout` | ✅ Bearer JWT | Invalida sessão e refresh token no Redis |
+| `POST` | `/auth/refresh` | ❌ Pública | Gera novo access token a partir do refresh token |
 | `POST` | `/contract` | ✅ Bearer JWT | Acesso ao serviço de contrato (bloqueado se já contratado) |
 | `GET` | `/actuator/health` | ❌ Pública | Health check da aplicação |
 
@@ -151,7 +161,8 @@ O **LoginService** é um microserviço de **autenticação e autorização** que
 **Response `200 OK`:**
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiJ9..."
+  "token": "eyJhbGciOiJIUzI1NiJ9...",
+  "refreshToken": "550e8400-e29b-41d4-a716-446655440000"
 }
 ```
 
@@ -177,7 +188,8 @@ O **LoginService** é um microserviço de **autenticação e autorização** que
   "contractService": false,
   "role": "USER",
   "id": 1,
-  "channel": "MOBILE"
+  "channel": "MOBILE",
+  "escolaId": 1
 }
 ```
 
@@ -185,7 +197,47 @@ O **LoginService** é um microserviço de **autenticação e autorização** que
 
 | Status | Situação |
 |---|---|
-| `401 Unauthorized` | Token ausente, inválido ou sessão expirada |
+| `401 Unauthorized` | Token ausente, inválido ou sessão expirada/substituída |
+
+---
+
+### POST `/auth/logout`
+
+**Header:** `Authorization: Bearer <token>`
+
+**Response `200 OK`:**
+```json
+{
+  "message": "Logout realizado"
+}
+```
+
+Remove a sessão `session:{sessionId}`, a chave de sessão do usuário `user_session:{userId}` e o refresh token do Redis. Limpa o `SecurityContext`.
+
+---
+
+### POST `/auth/refresh`
+
+**Request (body JSON ou cookie `refreshToken`):**
+```json
+{
+  "refreshToken": "550e8400-e29b-41d4-a716-446655440000"
+}
+```
+
+**Response `200 OK`:**
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiJ9...",
+  "refreshToken": "550e8400-e29b-41d4-a716-446655440000"
+}
+```
+
+**Possíveis erros:**
+
+| Status | Situação |
+|---|---|
+| `400 Bad Request` | Refresh token não informado, inválido ou expirado |
 
 ---
 
@@ -213,7 +265,7 @@ Cliente
   ▼ POST /auth/login { username, password }
 LoginRateLimitFilter
   │── Redis INCR rate_limit:login:{ip} (Lua INCR+EXPIRE)
-  │── contador > 5? → HTTP 429
+  │── contador > max? → HTTP 429
   ▼
 JwtAuthenticationFilter
   │── sem Bearer token → continua sem autenticação
@@ -226,18 +278,24 @@ LoginServiceImpl.login()
   │           └── UserAccountRepository.findByUsername()  →  Banco
   │     └── BCrypt.verify(password, hash)
   │── credenciais inválidas? → BadCredentialsException → HTTP 401
-  │── UserRepositoryDomain.findByUsername()  →  Banco
+  │── UserRepositoryDomain.findByUsername()  →  Banco (inclui escolaId)
+  │── Sessão única: SessionService.findSessionIdByUserId(userId)
+  │     └── se existir → SessionService.delete(oldSessionId)
+  │                    → SessionService.deleteUserSession(userId)
   │── SessionUtils.generateSessionId()  →  UUID aleatório
   │── SessionUtils.generateSymmetricKey()  →  32 bytes Base64
-  │── SessionDTO { sessionId, username, contractService, symmetricKey, role }
-  │── SessionUtils.saveSession()
-  │     └── SessionServiceImpl.save(SessionDTO, ttlMs)
-  │           └── Redis SET session:{uuid} {JSON} EX {ttl}
-  │── JwtService.generateToken(username, sessionId, role, contractService)
-  │     └── Claims: sub, iat, exp, sessionId, role, contractService, channel="MOBILE"
+  │── SessionDTO { sessionId, username, contractService, symmetricKey, role, userId, escolaId }
+  │── SessionUtils.saveSession(session)
+  │     └── Redis SET session:{uuid} {JSON} EX {access-ttl}
+  │     └── Redis SET user_session:{userId} {sessionId} EX {access-ttl}
+  │── JwtService.generateToken(username, sessionId, role, contractService, escolaId)
+  │     └── Claims: sub, iat, exp, sessionId, role, contractService, channel="MOBILE", escolaId
   │     └── Assina com HS256 usando jwt.secret
+  │── SessionUtils.saveRefreshToken(userId)  →  UUID de refresh
+  │     └── Redis SET refresh_token:{uuid} {userId} EX {refresh-ttl}
+  │     └── Redis SET user_refresh_token:{userId} {refreshUUID} EX {refresh-ttl}
   ▼
-AuthResponse { token }  →  HTTP 200
+AuthResponse { token, refreshToken }  →  HTTP 200
 ```
 
 ---
@@ -285,6 +343,7 @@ HTTP 200  →  MeResponseDTO
 | `nomeCompleto` | `String` | — | Nome completo do usuário |
 | `email` | `String` | — | E-mail do usuário |
 | `contractService` | `Boolean` | — | Flag indicando se o serviço já foi contratado |
+| `escolaId` | `Long` | `@Column(name="escola_id")` | ID da escola associada ao usuário |
 | `role` | `Role` | `EnumType.STRING` | Papel do usuário: `USER` ou `ADMIN` |
 
 **Enum `Role`:** `USER` | `ADMIN`
@@ -293,8 +352,11 @@ HTTP 200  →  MeResponseDTO
 
 | Chave | Tipo | TTL | Conteúdo |
 |---|---|---|---|
-| `session:{uuid}` | String (JSON) | `jwt.expiration-ms` | `SessionDTO` serializado com `GenericJackson2JsonRedisSerializer` |
-| `rate_limit:login:{ip}` | String (contador) | `rate-limit.window-seconds` (padrão 60 s) | Contador de requisições por janela deslizante |
+| `session:{uuid}` | String (JSON) | `jwt.expiration-ms` (15 min) | `SessionDTO` serializado |
+| `user_session:{userId}` | String | `jwt.expiration-ms` (15 min) | UUID da sessão ativa do usuário |
+| `refresh_token:{uuid}` | String | `jwt.refresh-expiration-ms` (7 dias) | userId como string |
+| `user_refresh_token:{userId}` | String | `jwt.refresh-expiration-ms` (7 dias) | UUID do refresh token do usuário |
+| `rate_limit:login:{ip}` | String (contador) | `rate-limit.window-seconds` | Contador de requisições por janela |
 
 ### SessionDTO (armazenado no Redis)
 
@@ -305,6 +367,8 @@ HTTP 200  →  MeResponseDTO
 | `contractService` | `Boolean` | Flag de contratação |
 | `symmetricKey` | `String` | Chave simétrica aleatória (32 bytes, Base64) |
 | `role` | `String` | Role como string (`USER` ou `ADMIN`) |
+| `userId` | `Long` | ID do usuário no banco |
+| `escolaId` | `Long` | ID da escola do usuário |
 
 ---
 
@@ -319,6 +383,7 @@ Configurado em `SecurityConfig` (`@Configuration`, `@EnableMethodSecurity`):
 | CSRF | Desabilitado (`csrf.disable()`) |
 | Sessão HTTP | `STATELESS` — Spring não cria HttpSession |
 | `/auth/login` | `permitAll()` — sem autenticação |
+| `/auth/refresh` | `permitAll()` — sem autenticação |
 | `/actuator/health` | `permitAll()` — sem autenticação |
 | Qualquer outra rota | `authenticated()` — requer JWT válido + sessão Redis |
 | Erro 401 | Responde com `401 Unauthorized` |
@@ -340,8 +405,10 @@ ContractAuthorizationFilter
 
 - Algoritmo: **HS256**
 - Chave: configurada em `${jwt.secret}` (bytes UTF-8)
-- Claims incluídos no token: `sub` (username), `iat`, `exp`, `sessionId`, `role`, `contractService`, `channel`
+- Claims incluídos no token: `sub` (username), `iat`, `exp`, `sessionId`, `role`, `contractService`, `channel`, `escolaId`
 - Biblioteca: `io.jsonwebtoken` (JJWT) versão 0.11.5
+- Access token TTL: **15 minutos** (`jwt.expiration-ms=900000`)
+- Refresh token TTL: **7 dias** (`jwt.refresh-expiration-ms=604800000`)
 
 ### Encoder de Senha
 
@@ -432,7 +499,8 @@ Referência baseada em `.env.example`:
 | Variável | Descrição | Exemplo |
 |---|---|---|
 | `jwt.secret` | Chave secreta para assinar o JWT (HS256) | `sua-chave-secreta-longa` |
-| `jwt.expiration-ms` | Validade do token em milissegundos | `300000` (5 min) |
+| `jwt.expiration-ms` | Validade do access token em milissegundos | `900000` (15 min) |
+| `jwt.refresh-expiration-ms` | Validade do refresh token em milissegundos | `604800000` (7 dias) |
 | `spring.redis.host` | Host do Redis | `localhost` |
 | `spring.redis.port` | Porta do Redis | `6379` |
 | `spring.datasource.url` | URL do banco de dados (produção) | `jdbc:postgresql://localhost:5432/db` |
@@ -466,17 +534,18 @@ src/main/java/com/br/itau/login/
 │   ├── GlobalExceptionHandler.java
 │   └── UserNotFoundException.java
 ├── model/
-│   ├── SessionDTO.java
+│   ├── SessionDTO.java            # sessionId, username, contractService, symmetricKey, role, userId, escolaId
 │   ├── entity/
-│   │   └── UserAccount.java       # Entidade JPA (@Entity)
+│   │   └── UserAccount.java       # Entidade JPA (@Entity) — inclui escolaId
 │   ├── enums/
 │   │   └── Role.java              # Enum USER, ADMIN
 │   ├── request/
 │   │   ├── AuthRequest.java       # (não utilizado em controllers)
-│   │   └── LoginRequest.java
+│   │   ├── LoginRequest.java
+│   │   └── RefreshRequest.java    # refreshToken
 │   └── response/
-│       ├── AuthResponse.java
-│       ├── MeResponseDTO.java
+│       ├── AuthResponse.java      # token + refreshToken
+│       ├── MeResponseDTO.java     # inclui escolaId
 │       └── errors/
 │           └── ErrorResponse.java
 ├── repository/
@@ -484,43 +553,105 @@ src/main/java/com/br/itau/login/
 ├── security/
 │   ├── AuthenticationFailureEventListener.java
 │   ├── ContractAuthorizationFilter.java
-│   ├── JwtAuthenticationFilter.java
+│   ├── JwtAuthenticationFilter.java  # retorna 401 "Sessão expirada ou substituída"
 │   ├── LoginRateLimitFilter.java
 │   └── UserDetailsServiceImpl.java
 ├── service/
 │   ├── ContractService.java
 │   ├── ContractServiceImpl.java   # ⚠️ Implementação incompleta
 │   ├── JwtService.java
-│   ├── JwtServiceImpl.java
+│   ├── JwtServiceImpl.java        # inclui escolaId no token; expõe getRefreshExpirationMs()
 │   ├── LoginRateLimiter.java
 │   ├── LoginService.java
-│   ├── LoginServiceImpl.java
+│   ├── LoginServiceImpl.java      # sessão única + escolaId + refresh token
+│   ├── LogoutService.java
+│   ├── LogoutServiceImpl.java     # invalida sessão + refresh token
 │   ├── MeService.java
-│   ├── MeServiceImpl.java
-│   ├── SessionService.java
+│   ├── MeServiceImpl.java         # retorna escolaId
+│   ├── RefreshTokenService.java
+│   ├── RefreshTokenServiceImpl.java  # valida refresh token, emite novo access token
+│   ├── SessionService.java        # inclui métodos de user_session e refresh_token
 │   └── SessionServiceImpl.java
 └── utils/
     ├── IpUtils.java               # Extração de IP (X-Forwarded-For)
-    └── SessionUtils.java          # Geração de sessionId, symmetricKey, token
+    └── SessionUtils.java          # generateSessionId, symmetricKey, token, refreshToken
 ```
 
 ---
 
-## 13. Pendências e Melhorias
+## 13. Ajustes Implementados
 
-Os itens abaixo foram identificados com base exclusivamente no código atual:
+Os itens abaixo foram implementados como pendências críticas do serviço de login:
+
+### 1. Endpoint `POST /auth/logout`
+- Recebe JWT no header `Authorization: Bearer <token>`
+- Extrai `sessionId` do JWT e busca a sessão no Redis
+- Remove as chaves: `session:{sessionId}`, `user_session:{userId}`, `refresh_token:{uuid}`, `user_refresh_token:{userId}`
+- Limpa o `SecurityContext`
+- Retorna `200 OK` com `{ "message": "Logout realizado" }`
+
+### 2. Endpoint `POST /auth/refresh`
+- Recebe refresh token via **body JSON** (`{ "refreshToken": "..." }`) ou **cookie** `refreshToken`
+- Valida o refresh token no Redis (`refresh_token:{uuid}` → userId)
+- Busca o usuário no banco pelo userId
+- Invalida a sessão antiga (`session:{oldSessionId}`)
+- Gera novo `sessionId` e novo access token (JWT, 15 min)
+- Salva nova sessão no Redis
+- Retorna `{ "token": "...", "refreshToken": "..." }` (mantém o mesmo refresh token)
+
+### 3. Controle de Sessão Única
+- No login, antes de criar nova sessão: busca `user_session:{userId}` no Redis
+- Se existir sessão anterior: remove `session:{oldSessionId}` e `user_session:{userId}`
+- Cria nova sessão e atualiza o mapeamento `user_session:{userId}` → novo sessionId
+- **Opção A implementada**: sessão antiga é invalidada, usuário é deslogado do dispositivo anterior
+
+### 4. `escola_id` no JWT e na Sessão
+- Campo `escolaId` adicionado à entidade `UserAccount` (coluna `escola_id`)
+- `SessionDTO` agora inclui `userId` e `escolaId`
+- JWT agora carrega a claim `escolaId`
+- `GET /auth/me` retorna `escolaId` no response body
+- Access token expira em **15 minutos** (`jwt.expiration-ms=900000`)
+- Refresh token expira em **7 dias** (`jwt.refresh-expiration-ms=604800000`)
+
+### 5. Validação de Sessão em Cada Requisição
+- `JwtAuthenticationFilter` modificado: quando o JWT é válido mas a sessão não existe no Redis (foi invalidada por novo login), retorna **HTTP 401** diretamente com `{ "message": "Sessão expirada ou substituída" }` sem continuar o filtro chain
+
+### Configurações em `application.yaml`
+
+```yaml
+jwt:
+  secret: "ChangeThisSecretKeyForProdUseAtLeast32Chars!"
+  expiration-ms: 900000        # 15 minutos (access token)
+  refresh-expiration-ms: 604800000  # 7 dias (refresh token)
+```
+
+### Conformidade com Arquitetura
+
+| Item | Status |
+|---|---|
+| Spring Boot + Spring Security + JWT + Redis | ✅ |
+| Padrão Ports & Adapters (Hexagonal) | ✅ mantido |
+| Filter Chain ordenado | ✅ mantido |
+| Fail-Open Rate Limiting distribuído | ✅ mantido |
+| Separação de responsabilidades por camada | ✅ mantido |
+| Testes unitários atualizados | ✅ 15 testes passando |
+
+---
+
+## 14. Pendências e Melhorias
+
+Os itens abaixo foram identificados com base no código atual:
 
 | # | Pendência | Impacto |
 |---|---|---|
-| 1 | **Endpoint `/auth/logout` ausente** — `SessionService.delete()` existe mas nenhum controller o invoca | Alto — sem logout, sessões só expiram pelo TTL do Redis |
-| 2 | **Endpoint `/auth/refresh` ausente** — não há lógica de renovação de token | Médio — usuário precisa fazer login novamente ao expirar |
-| 3 | **`LoginRateLimitFilter` usa path `/api/v1/auth/login`** mas o endpoint real é `/auth/login` — rate limit pode não estar sendo aplicado | Alto — segurança |
-| 4 | **`ContractAuthorizationFilter` usa path `/api/v1/contract`** mas o endpoint real é `/contract` — filtro de autorização pode não executar | Alto — segurança |
-| 5 | **`ContractServiceImpl` com implementação vazia** — corpo do método `contract()` e injeção de dependência estão comentados | Médio |
-| 6 | **`AuthRequest` (email + password) não utilizado** — classe existe mas nenhum controller a referencia | Baixo — dead code |
-| 7 | **Role `ADMIN` sem proteção de rota** — declarada no enum mas sem `hasRole("ADMIN")` aplicado em nenhuma rota | Médio |
-| 8 | **Credenciais hardcoded em `DataInitializer`** — `username=Thiago`, `password=231299` fixas no código-fonte | Alto — segurança em produção |
-| 9 | **`MeServiceImpl` recebe `sessionId` no lugar do token JWT** — `LoginImpl` passa `session.getSessionId()` como argumento `token`, então `extractChannelFromToken` sempre retorna `null`; o channel é sobrescrito para `"MOBILE"` no controller | Baixo — funcional, mas lógica inconsistente |
+| 1 | **`LoginRateLimitFilter` usa path `/api/v1/auth/login`** mas o endpoint real é `/auth/login` — rate limit pode não estar sendo aplicado | Alto — segurança |
+| 2 | **`ContractAuthorizationFilter` usa path `/api/v1/contract`** mas o endpoint real é `/contract` — filtro de autorização pode não executar | Alto — segurança |
+| 3 | **`ContractServiceImpl` com implementação vazia** — corpo do método `contract()` e injeção de dependência estão comentados | Médio |
+| 4 | **`AuthRequest` (email + password) não utilizado** — classe existe mas nenhum controller a referencia | Baixo — dead code |
+| 5 | **Role `ADMIN` sem proteção de rota** — declarada no enum mas sem `hasRole("ADMIN")` aplicado em nenhuma rota | Médio |
+| 6 | **Credenciais hardcoded em `DataInitializer`** — `username=Thiago`, `password=231299` fixas no código-fonte | Alto — segurança em produção |
+| 7 | **`MeServiceImpl` recebe `sessionId` no lugar do token JWT** — `LoginImpl` passa `session.getSessionId()` como argumento `token`, então `extractChannelFromToken` sempre retorna `null`; o channel é sobrescrito para `"MOBILE"` no controller | Baixo — funcional, mas lógica inconsistente |
+| 8 | **`UserAccount` sem `schema = "auth"`** — para produção com PostgreSQL, adicionar `@Table(name="users", schema="auth")` e configurar o schema H2 para desenvolvimento local | Médio |
 
 ---
 
@@ -541,10 +672,10 @@ autenticacao:
 endpoints:
   login: "POST /auth/login"
   me: "GET /auth/me"
+  logout: "POST /auth/logout"
+  refresh: "POST /auth/refresh"
   contract: "POST /contract"
   health: "GET /actuator/health"
-  logout: NÃO IMPLEMENTADO
-  refresh: NÃO IMPLEMENTADO
 
 roles:
   - USER
@@ -558,5 +689,8 @@ banco_de_dados:
 cache_sessao:
   tecnologia: Redis via Lettuce
   chave_sessao: "session:{sessionId}"
+  chave_user_session: "user_session:{userId}"
+  chave_refresh_token: "refresh_token:{uuid}"
+  chave_user_refresh_token: "user_refresh_token:{userId}"
   chave_rate_limit: "rate_limit:login:{ip}"
 ```

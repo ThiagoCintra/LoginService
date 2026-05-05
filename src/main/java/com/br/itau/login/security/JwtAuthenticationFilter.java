@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -45,10 +46,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 					Claims claims = jwtService.getClaims(token);
 					String username = claims.getSubject();
 					String sessionId = claims.get("sessionId", String.class);
-					Boolean contractService = claims.get("contractService", Boolean.class);
 					SessionDTO session = sessionService.find(sessionId);
 					if (Objects.isNull(session)) {
 						SecurityContextHolder.clearContext();
+						response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+						response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+						response.getWriter().write("{\"message\":\"Sessão expirada ou substituída\"}");
+						return;
 					} else {
 						List<GrantedAuthority> authorities = new ArrayList<>();
 						if (Objects.nonNull(session.getRole())) {

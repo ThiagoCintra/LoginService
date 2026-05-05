@@ -34,6 +34,7 @@ public class DataInitializer implements CommandLineRunner {
             user.setEmail(null);
             user.setContractService(Boolean.FALSE);
             user.setRole(Role.USER);
+            user.setEscolaId(1L);
             userRepository.save(user);
             System.out.println("Inserted initial user 'Thiago'");
         });

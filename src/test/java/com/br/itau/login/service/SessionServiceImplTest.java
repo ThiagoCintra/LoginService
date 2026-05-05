@@ -34,14 +34,14 @@ class SessionServiceImplTest {
 
 	@Test
 	void save_shouldStoreSessionWithTtl() {
-		SessionDTO session = new SessionDTO("sid-1", "user1", Boolean.FALSE, "key", "USER");
+		SessionDTO session = new SessionDTO("sid-1", "user1", Boolean.FALSE, "key", "USER", null, null);
 		sessionService.save(session, 60_000L);
 		verify(valueOps).set(eq("session:sid-1"), eq(session), eq(Duration.ofMillis(60_000L)));
 	}
 
 	@Test
 	void find_shouldReturnSessionWhenPresent() {
-		SessionDTO expected = new SessionDTO("sid-1", "user1", Boolean.TRUE, "key", "USER");
+		SessionDTO expected = new SessionDTO("sid-1", "user1", Boolean.TRUE, "key", "USER", null, null);
 		when(valueOps.get("session:sid-1")).thenReturn(expected);
 
 		SessionDTO result = sessionService.find("sid-1");

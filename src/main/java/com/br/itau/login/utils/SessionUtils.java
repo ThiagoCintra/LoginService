@@ -29,12 +29,31 @@ public class SessionUtils {
 		return java.util.Base64.getEncoder().encodeToString(keyBytes);
 	}
 
+	public String generateRefreshToken() {
+		return java.util.UUID.randomUUID().toString();
+	}
+
 	public void saveSession(SessionDTO session) {
 		sessionService.save(session, jwtService.getExpirationMs());
+		if (session.getUserId() != null) {
+			sessionService.saveUserSession(session.getUserId(), session.getSessionId(), jwtService.getExpirationMs());
+		}
+	}
+
+	public String saveRefreshToken(Long userId) {
+		String refreshToken = generateRefreshToken();
+		long ttl = jwtService.getRefreshExpirationMs();
+		sessionService.saveRefreshToken(refreshToken, userId, ttl);
+		sessionService.saveUserRefreshToken(userId, refreshToken, ttl);
+		return refreshToken;
 	}
 
 	public String createToken(LoginRequest loginRequest, String sessionId, String roleName, UserAccount userAccount) {
 		return jwtService.generateToken(loginRequest.getUsername(), sessionId, roleName,
-				userAccount.getContractService());
+				userAccount.getContractService(), userAccount.getEscolaId());
+	}
+
+	public String createToken(String username, String sessionId, String roleName, Boolean contractService, Long escolaId) {
+		return jwtService.generateToken(username, sessionId, roleName, contractService, escolaId);
 	}
 }

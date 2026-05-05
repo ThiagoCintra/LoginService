@@ -1,10 +1,5 @@
 package com.br.itau.login.service;
 
-import java.security.SecureRandom;
-import java.util.Base64;
-import java.util.Objects;
-
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,12 +19,14 @@ public class LoginServiceImpl implements LoginService {
 	private final AuthenticationManager authenticationManager;
 	private final SessionUtils sessionUtils;
 	private final UserRepositoryDomain userRepositoryPort;
+	private final SessionService sessionService;
 
 	public LoginServiceImpl(AuthenticationManager authenticationManager, SessionUtils sessionUtils,
-			UserRepositoryDomain userRepositoryPort) {
+			UserRepositoryDomain userRepositoryPort, SessionService sessionService) {
 		this.authenticationManager = authenticationManager;
 		this.sessionUtils = sessionUtils;
 		this.userRepositoryPort = userRepositoryPort;
+		this.sessionService = sessionService;
 	}
 
 	@Override
@@ -41,21 +38,28 @@ public class LoginServiceImpl implements LoginService {
 		UserAccount userAccount = userRepositoryPort.findByUsername(loginRequest.getUsername())
 				.orElseThrow(() -> new UserNotFoundException("User not found"));
 
-		String roleName = userAccount != null && userAccount.getRole() != null ? userAccount.getRole().name() : null;
+		String roleName = userAccount.getRole() != null ? userAccount.getRole().name() : null;
+
+		// Single-session enforcement: invalidate existing session if present
+		String existingSessionId = sessionService.findSessionIdByUserId(userAccount.getId());
+		if (existingSessionId != null) {
+			sessionService.delete(existingSessionId);
+			sessionService.deleteRefreshToken(existingSessionId);
+		}
+		// Also remove any existing refresh tokens tied to this user
+		sessionService.deleteUserSession(userAccount.getId());
 
 		String sessionId = sessionUtils.generateSessionId();
-
 		String symmetricKey = sessionUtils.generateSymmetricKey();
-		
 
 		SessionDTO session = new SessionDTO(sessionId, loginRequest.getUsername(), userAccount.getContractService(),
-				symmetricKey, roleName);
+				symmetricKey, roleName, userAccount.getId(), userAccount.getEscolaId());
 
 		sessionUtils.saveSession(session);
 		String token = sessionUtils.createToken(loginRequest, sessionId, roleName, userAccount);
+		String refreshToken = sessionUtils.saveRefreshToken(userAccount.getId());
 
-		return new AuthResponse(token);
-
+		return new AuthResponse(token, refreshToken);
 	}
 
 }

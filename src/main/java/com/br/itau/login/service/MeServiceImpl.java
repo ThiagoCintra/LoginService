@@ -57,6 +57,7 @@ public class MeServiceImpl implements MeService {
         response.setContractService(session.getContractService());
         response.setRole(session.getRole());
         response.setChannel(channel);
+        response.setEscolaId(session.getEscolaId());
 
         logger.info("User info retrieved successfully for: {}", username);
         return response;

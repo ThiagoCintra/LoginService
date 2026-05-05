@@ -8,22 +8,25 @@ import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
-import java.util.Map;
-import java.util.UUID;
 
 @Service
 public class JwtServiceImpl implements JwtService {
 
 	private final Key key;
 	private final long expirationMs;
+	private final long refreshExpirationMs;
 
-	public JwtServiceImpl(@Value("${jwt.secret}") String secret, @Value("${jwt.expiration-ms}") long expirationMs) {
+	public JwtServiceImpl(
+			@Value("${jwt.secret}") String secret,
+			@Value("${jwt.expiration-ms}") long expirationMs,
+			@Value("${jwt.refresh-expiration-ms}") long refreshExpirationMs) {
 		this.key = Keys.hmacShaKeyFor(secret.getBytes());
 		this.expirationMs = expirationMs;
+		this.refreshExpirationMs = refreshExpirationMs;
 	}
 
 	@Override
-	public String generateToken(String username, String sessionId, String role, Boolean contractService) {
+	public String generateToken(String username, String sessionId, String role, Boolean contractService, Long escolaId) {
 	    Date now = new Date();
 	    Date exp = new Date(now.getTime() + expirationMs);
 	    return Jwts.builder()
@@ -33,7 +36,8 @@ public class JwtServiceImpl implements JwtService {
 	            .claim("sessionId", sessionId)
 	            .claim("role", role)
 	            .claim("contractService", contractService)
-	            .claim("channel", "MOBILE") 
+	            .claim("channel", "MOBILE")
+	            .claim("escolaId", escolaId)
 	            .signWith(key, SignatureAlgorithm.HS256)
 	            .compact();
 	}
@@ -57,8 +61,14 @@ public class JwtServiceImpl implements JwtService {
 		return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
 	}
 
+	@Override
 	public long getExpirationMs() {
 		return expirationMs;
+	}
+
+	@Override
+	public long getRefreshExpirationMs() {
+		return refreshExpirationMs;
 	}
 
 }

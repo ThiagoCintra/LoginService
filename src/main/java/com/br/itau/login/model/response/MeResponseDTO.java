@@ -14,5 +14,6 @@ public class MeResponseDTO {
     private String role;
     private Long id;
     private String channel;
+    private Long escolaId;
     
 }

@@ -60,7 +60,8 @@ spring:
 
 jwt:
   secret: "ChangeThisSecretKeyForProdUseAtLeast32Chars!"
-  expiration-ms: 300000 #5 minutos
+  expiration-ms: 900000       # 15 minutos
+  refresh-expiration-ms: 604800000  # 7 dias
 
 rate-limit:
   max-requests: 100      # máximo de tentativas de login por janela

@@ -36,6 +36,9 @@ public class UserAccount {
     
     private Boolean contractService;
 
+    @Column(name = "escola_id")
+    private Long escolaId;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 }

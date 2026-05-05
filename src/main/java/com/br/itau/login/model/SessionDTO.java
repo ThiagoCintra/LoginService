@@ -13,4 +13,6 @@ public class SessionDTO {
 	private Boolean contractService;
 	private String symmetricKey;
 	private String role;
+	private Long userId;
+	private Long escolaId;
 }
