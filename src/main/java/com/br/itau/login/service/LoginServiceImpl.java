@@ -44,9 +44,13 @@ public class LoginServiceImpl implements LoginService {
 		String existingSessionId = sessionService.findSessionIdByUserId(userAccount.getId());
 		if (existingSessionId != null) {
 			sessionService.delete(existingSessionId);
-			sessionService.deleteRefreshToken(existingSessionId);
 		}
-		// Also remove any existing refresh tokens tied to this user
+		// Remove existing refresh token for this user
+		String existingRefreshToken = sessionService.findRefreshTokenByUserId(userAccount.getId());
+		if (existingRefreshToken != null) {
+			sessionService.deleteRefreshToken(existingRefreshToken);
+			sessionService.deleteUserRefreshToken(userAccount.getId());
+		}
 		sessionService.deleteUserSession(userAccount.getId());
 
 		String sessionId = sessionUtils.generateSessionId();

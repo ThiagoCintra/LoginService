@@ -62,17 +62,17 @@ public class LoginImpl implements Login {
 	}
 
 	@Override
-	public ResponseEntity<AuthResponse> refresh(@RequestBody(required = false) RefreshRequest body,
+	public ResponseEntity<AuthResponse> refresh(@RequestBody(required = false) RefreshRequest refreshRequest,
 			HttpServletRequest request) {
-		String refreshToken = resolveRefreshToken(body, request);
+		String refreshToken = resolveRefreshToken(refreshRequest, request);
 		AuthResponse response = refreshTokenService.refresh(refreshToken);
 		return ResponseEntity.ok(response);
 	}
 
-	private String resolveRefreshToken(RefreshRequest body, HttpServletRequest request) {
+	private String resolveRefreshToken(RefreshRequest refreshRequest, HttpServletRequest request) {
 		// 1. Try request body
-		if (body != null && body.getRefreshToken() != null && !body.getRefreshToken().isBlank()) {
-			return body.getRefreshToken();
+		if (refreshRequest != null && refreshRequest.getRefreshToken() != null && !refreshRequest.getRefreshToken().isBlank()) {
+			return refreshRequest.getRefreshToken();
 		}
 		// 2. Try cookie
 		if (request.getCookies() != null) {
